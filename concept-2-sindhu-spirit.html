@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCNC — Concept 2 · The Sindhu Spirit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════
+   SCNC — CONCEPT 2 · "THE SINDHU SPIRIT"
+   Editorial · Cultural · Museum-quality
+   Palette: Cream · Crimson · Indigo · Gold
+   ════════════════════════════════════════════════════ */
+:root{
+  --cream:#FBF7EE;
+  --cream-2:#F5EDDB;
+  --cream-3:#EFE3C9;
+  --paper:#fff;
+  --crimson:#8E1B3D;
+  --crimson-deep:#6E1230;
+  --crimson-pale:#FBEEF1;
+  --indigo:#1E3A8A;
+  --indigo-pale:#EDF1FA;
+  --gold:#A9762A;
+  --gold-soft:#C99A3F;
+  --gold-pale:#FBF2DE;
+  --ink:#231A12;
+  --text:#4B4138;
+  --muted:#867A6B;
+  --line:rgba(120,30,60,.13);
+  --line-gold:rgba(169,118,42,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;line-height:1.6}
+a{color:inherit}
+
+/* Ajrak band */
+.ajrak{height:9px;background:repeating-linear-gradient(90deg,
+  #1E3A8A 0 8px,#EFE3C9 8px 10px,#8E1B3D 10px 18px,#EFE3C9 18px 20px,
+  #A9762A 20px 28px,#EFE3C9 28px 30px,#8E1B3D 30px 38px,#EFE3C9 38px 40px)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(251,247,238,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);padding:0 clamp(1.1rem,4vw,2.8rem);height:74px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:.9rem;text-decoration:none}
+.emblem{width:46px;height:46px;border-radius:50%;border:2px solid var(--crimson);background:var(--crimson-pale);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-name{font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;letter-spacing:.04em;line-height:1}
+.brand-sub{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.nav-links{list-style:none;display:flex;align-items:center;gap:.1rem}
+.nav-links a{font-size:.84rem;font-weight:500;color:var(--text);text-decoration:none;padding:.45rem .85rem;border-radius:6px;transition:.15s}
+.nav-links a:hover{background:var(--cream-2);color:var(--ink)}
+.nav-cta{background:var(--crimson)!important;color:#fff!important;font-weight:600!important;padding:.5rem 1.2rem!important;border-radius:7px!important}
+.nav-cta:hover{background:var(--crimson-deep)!important}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--ink);border-radius:2px}
+
+/* HERO */
+.hero{max-width:1240px;margin:0 auto;padding:clamp(2.5rem,6vw,5rem) clamp(1.1rem,4vw,2.8rem);
+  display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.h-kick{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--line-gold);border-radius:99px;
+  padding:.32rem .9rem;margin-bottom:1.8rem}
+.h-kick b{font-family:'Playfair Display',serif;color:var(--crimson);font-size:.78rem}
+.h-kick span{font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:'Playfair Display',serif;font-weight:900;line-height:1.02;letter-spacing:-.015em;color:var(--ink);margin-bottom:.3rem}
+.hero h1 .l1{display:block;font-size:clamp(2.6rem,5.4vw,4.4rem)}
+.hero h1 .l2{display:block;font-size:clamp(2.6rem,5.4vw,4.4rem);font-style:italic;color:var(--crimson)}
+.hero h1 .l3{display:block;font-family:'Lora',serif;font-style:italic;font-weight:400;font-size:clamp(1.05rem,2.2vw,1.5rem);
+  color:var(--muted);margin-top:.5rem;letter-spacing:0}
+.verse{margin:1.8rem 0;padding:1rem 1.4rem;border-left:3px solid var(--gold);background:var(--gold-pale);border-radius:0 12px 12px 0}
+.verse p{font-family:'Lora',serif;font-style:italic;font-size:1rem;color:var(--crimson-deep);line-height:1.7;margin-bottom:.35rem}
+.verse cite{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-style:normal}
+.hero-desc{color:var(--text);font-size:1rem;line-height:1.8;max-width:470px;margin-bottom:2rem}
+.actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;border-radius:9px;font-weight:600;font-size:.92rem;text-decoration:none;border:0;cursor:pointer;transition:.2s}
+.btn-fill{background:var(--crimson);color:#fff;box-shadow:0 6px 20px rgba(142,27,61,.25)}
+.btn-fill:hover{background:var(--crimson-deep);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.6px solid var(--line)}
+.btn-ghost:hover{border-color:var(--crimson);color:var(--crimson)}
+
+/* hero art — ajrak diamond panel */
+.hero-art{position:relative;border-radius:24px;overflow:hidden;background:var(--ink);min-height:440px;
+  box-shadow:0 24px 60px rgba(60,20,10,.25)}
+.hero-art .pat{position:absolute;inset:0;background-image:
+  repeating-linear-gradient(0deg,rgba(245,237,219,.06) 0 1px,transparent 1px 40px),
+  repeating-linear-gradient(90deg,rgba(245,237,219,.06) 0 1px,transparent 1px 40px),
+  repeating-linear-gradient(45deg,rgba(142,27,61,.22) 0 2px,transparent 2px 22px),
+  repeating-linear-gradient(-45deg,rgba(30,58,138,.18) 0 2px,transparent 2px 22px)}
+.hero-art .diamond{position:absolute;top:50%;left:50%;transform:translate(-50%,-56%) rotate(45deg);width:150px;height:150px;
+  border:2px solid rgba(201,154,63,.6);box-shadow:inset 0 0 0 18px rgba(142,27,61,.14),0 0 0 18px rgba(30,58,138,.1)}
+.hero-art .cap{position:absolute;left:1.6rem;right:1.6rem;bottom:1.5rem;z-index:2}
+.hero-art .cap .t{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,237,219,.5);margin-bottom:.35rem}
+.hero-art .cap h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#F5EDDB;margin-bottom:.3rem}
+.hero-art .cap p{font-size:.8rem;color:rgba(245,237,219,.55);line-height:1.6;max-width:330px}
+
+/* STORY */
+.story{background:var(--cream-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.story-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.scol{padding:clamp(2.4rem,4vw,3.4rem) clamp(1.4rem,3vw,2.4rem);border-right:1px solid var(--line);position:relative}
+.scol:last-child{border-right:0}
+.scol .n{font-family:'Playfair Display',serif;font-weight:900;font-size:3.4rem;color:rgba(142,27,61,.1);line-height:1;position:absolute;top:1.4rem;right:1.4rem}
+.scol .era{font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--crimson);margin-bottom:.6rem}
+.scol h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:var(--ink);margin-bottom:.5rem;line-height:1.25}
+.scol p{font-size:.86rem;color:var(--text);line-height:1.75}
+.scol .drop::first-letter{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:800;color:var(--crimson);float:left;line-height:.8;padding:.1rem .4rem 0 0}
+
+/* SECTION */
+.section{max-width:1200px;margin:0 auto;padding:clamp(3.6rem,7vw,6.2rem) clamp(1.1rem,4vw,2.8rem)}
+.label{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.label .pill{font-size:.66rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--line-gold);padding:.28rem .8rem;border-radius:99px}
+.h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.9rem,4vw,3rem);line-height:1.14;letter-spacing:-.01em;color:var(--ink);margin-bottom:.8rem}
+.h2 em{font-style:italic;color:var(--crimson)}
+.sub{color:var(--text);font-size:1rem;line-height:1.8;max-width:600px;margin-bottom:3rem}
+
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:1.2rem;align-items:start}
+.pillar{border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--paper);transition:.25s}
+.pillar:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(120,40,30,.12);border-color:rgba(142,27,61,.25)}
+.pv{height:190px;position:relative;overflow:hidden}
+.pillar.feat .pv{height:230px}
+.pv-ajrak{background:var(--ink)}
+.pv-ajrak .p{position:absolute;inset:0;background-image:
+  repeating-linear-gradient(0deg,rgba(245,237,219,.06) 0 1px,transparent 1px 30px),
+  repeating-linear-gradient(90deg,rgba(245,237,219,.06) 0 1px,transparent 1px 30px),
+  repeating-linear-gradient(45deg,rgba(142,27,61,.25) 0 2px,transparent 2px 16px),
+  repeating-linear-gradient(-45deg,rgba(30,58,138,.2) 0 2px,transparent 2px 16px)}
+.pv-ajrak .c{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);width:84px;height:84px;
+  border:2px solid rgba(201,154,63,.7);box-shadow:inset 0 0 0 13px rgba(142,27,61,.16)}
+.pv-river{background:linear-gradient(160deg,#0C1A40,#1E3A8A 55%,#1E1B5E)}
+.pv-river .w{position:absolute;left:-50%;width:200%;height:60%;bottom:0;border-radius:50%;background:rgba(120,170,235,.12);animation:wave 7s ease-in-out infinite}
+.pv-river .w2{animation:wave 9s ease-in-out infinite reverse;background:rgba(120,170,235,.07)}
+@keyframes wave{0%,100%{transform:translateX(0) scaleX(1)}50%{transform:translateX(7%) scaleX(1.05)}}
+.pv-river svg{position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);opacity:.75}
+.pv-jhule{background:linear-gradient(160deg,#1C0A00,#7A1733 55%,#C99A3F)}
+.pv-jhule svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.9}
+.pb{padding:1.5rem}
+.pb .tag{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.pb h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--ink);margin-bottom:.5rem}
+.pillar.feat .pb h3{font-size:1.4rem}
+.pb p{font-size:.85rem;color:var(--text);line-height:1.7}
+
+/* RALLI divider */
+.ralli{display:flex;height:14px}
+.ralli i{flex:1}
+
+/* SEVEN QUEENS */
+.queens{background:var(--cream-2);border-top:1px solid var(--line)}
+.queens-in{max-width:1240px;margin:0 auto;padding:clamp(3.6rem,7vw,6.2rem) clamp(1.1rem,4vw,2.8rem)}
+.q-row{display:grid;grid-template-columns:repeat(7,1fr);gap:.8rem;margin-top:2.6rem}
+.queen{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:1.4rem 1rem;text-align:center;transition:.2s}
+.queen:hover{transform:translateY(-4px);border-color:var(--crimson);box-shadow:0 14px 32px rgba(120,40,30,.12)}
+.queen .ring{width:48px;height:48px;margin:0 auto .9rem;border-radius:50%;border:1.5px solid var(--gold-soft);
+  display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:var(--crimson);background:var(--gold-pale)}
+.queen .nm{font-family:'Playfair Display',serif;font-weight:600;font-size:1rem;color:var(--ink);margin-bottom:.2rem}
+.queen .vt{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.q-note{margin-top:2rem;font-family:'Lora',serif;font-style:italic;color:var(--muted);font-size:.95rem;text-align:center;max-width:680px;margin-left:auto;margin-right:auto}
+
+/* LIVING CULTURE */
+.culture{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.8rem}
+.cc{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--paper);transition:.2s}
+.cc:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(120,40,30,.1)}
+.cc .top{height:120px;display:flex;align-items:center;justify-content:center}
+.cc .top svg{opacity:.85}
+.t-food{background:linear-gradient(135deg,#FBF2DE,#EDD9A6)}
+.t-music{background:linear-gradient(135deg,#EDF1FA,#C3D0EE)}
+.t-craft{background:linear-gradient(135deg,#FBEEF1,#F0C9D2)}
+.cc .cb{padding:1.3rem}
+.cc .tag{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.cc h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--ink);margin-bottom:.35rem}
+.cc p{font-size:.83rem;color:var(--text);line-height:1.65}
+
+/* EVENTS list */
+.events{background:var(--cream-2);border-top:1px solid var(--line)}
+.events-in{max-width:1100px;margin:0 auto;padding:clamp(3.6rem,7vw,6.2rem) clamp(1.1rem,4vw,2.8rem)}
+.ev-list{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 30px rgba(60,30,20,.05)}
+.row{display:grid;grid-template-columns:96px 1fr auto;gap:1.5rem;align-items:center;padding:1.4rem 1.8rem;border-bottom:1px solid var(--line);transition:.15s;cursor:pointer}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--cream)}
+.row.flag{background:var(--crimson-pale);border-left:4px solid var(--crimson)}
+.rd{text-align:center}
+.rd .m{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--crimson)}
+.rd .d{font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;color:var(--ink);line-height:1}
+.rd .d.sm{font-size:1.2rem;padding-top:.35rem}
+.ri .tags{display:flex;gap:.4rem;margin-bottom:.4rem;flex-wrap:wrap}
+.ri .tg{font-size:.56rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.18rem .55rem;border-radius:99px}
+.tg-rel{background:var(--indigo-pale);color:var(--indigo)}.tg-fam{background:#EAF7EF;color:#2E7D4F}
+.tg-spi{background:#F6EFFB;color:#7A3FA0}.tg-flag{background:var(--crimson);color:#fff}.tg-cul{background:var(--gold-pale);color:var(--gold)}
+.ri h4{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--ink);margin-bottom:.2rem}
+.row.flag .ri h4{color:var(--crimson)}
+.ri .loc{font-size:.78rem;color:var(--muted)}
+.rb{padding:.5rem 1.1rem;border-radius:8px;font-size:.76rem;font-weight:600;text-decoration:none;white-space:nowrap;transition:.15s}
+.rb-fill{background:var(--crimson);color:#fff}.rb-fill:hover{background:var(--crimson-deep)}
+.rb-out{background:var(--paper);color:var(--ink);border:1px solid var(--line)}.rb-out:hover{border-color:var(--crimson);color:var(--crimson)}
+.recur{margin-top:1.4rem;display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:center}
+.recur span{font-size:.8rem;color:var(--indigo);display:flex;align-items:center;gap:.5rem}
+.recur span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--indigo)}
+
+/* JOIN / GIVE band */
+.band-in{max-width:1200px;margin:0 auto;padding:clamp(3.4rem,6vw,5.5rem) clamp(1.1rem,4vw,2.8rem)}
+.band{display:grid;grid-template-columns:1.3fr 1fr;gap:2.5rem;align-items:center;background:linear-gradient(135deg,var(--crimson-deep),var(--crimson) 60%,var(--gold));
+  border-radius:26px;padding:clamp(2.2rem,5vw,3.6rem);color:#fff;position:relative;overflow:hidden}
+.band::before{content:"";position:absolute;inset:0;opacity:.14;background-image:
+  repeating-linear-gradient(45deg,rgba(255,255,255,.6) 0 2px,transparent 2px 18px),
+  repeating-linear-gradient(-45deg,rgba(255,255,255,.6) 0 2px,transparent 2px 18px)}
+.band-l{position:relative}
+.band h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.14;margin-bottom:.9rem}
+.band h2 em{font-style:italic;color:var(--gold-pale)}
+.band p{color:rgba(255,255,255,.86);font-size:.98rem;line-height:1.75;max-width:480px}
+.band-r{position:relative;display:flex;flex-direction:column;gap:.8rem;align-items:flex-start}
+.btn-cream{background:var(--cream);color:var(--crimson-deep)}.btn-cream:hover{background:#fff;transform:translateY(-2px)}
+.btn-line{background:transparent;color:#fff;border:1.6px solid rgba(255,255,255,.5)}.btn-line:hover{background:rgba(255,255,255,.12)}
+.band-note{font-size:.74rem;color:rgba(255,255,255,.72)}
+
+/* FOOTER */
+footer{background:var(--ink);color:#fff;border-top:4px solid var(--crimson)}
+.foot-top{max-width:1200px;margin:0 auto;padding:clamp(2.8rem,6vw,4rem) clamp(1.1rem,4vw,2.8rem) 2.2rem;display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:2.5rem}
+.fb-name{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--gold-pale);margin-bottom:.6rem}
+.foot-brand p{font-size:.84rem;color:rgba(245,237,219,.45);line-height:1.7;max-width:250px;margin-bottom:1.1rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;border:1px solid rgba(245,237,219,.16);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:rgba(245,237,219,.5);text-decoration:none;transition:.2s}
+.socials a:hover{background:var(--crimson);border-color:var(--crimson);color:#fff}
+.foot-col h4{font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,237,219,.4);margin-bottom:1rem}
+.foot-col ul{list-style:none}.foot-col li{margin-bottom:.55rem}
+.foot-col a{font-size:.84rem;color:rgba(245,237,219,.55);text-decoration:none}.foot-col a:hover{color:#fff}
+.foot-contact p{font-size:.83rem;color:rgba(245,237,219,.55);line-height:1.7;margin-bottom:.4rem}
+.foot-bottom{border-top:1px solid rgba(245,237,219,.07)}
+.fb-in{max-width:1200px;margin:0 auto;padding:1.2rem clamp(1.1rem,4vw,2.8rem);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.fb-in p{font-size:.74rem;color:rgba(245,237,219,.3)}
+.badge501{display:inline-flex;align-items:center;gap:.4rem;border:1px solid rgba(169,118,42,.4);color:rgba(245,237,219,.5);padding:.3rem .8rem;border-radius:99px;font-size:.64rem;font-weight:600;letter-spacing:.06em}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr;gap:2.5rem}
+  .pillars{grid-template-columns:1fr 1fr}
+  .q-row{grid-template-columns:repeat(4,1fr)}
+  .culture{grid-template-columns:1fr}
+  .band{grid-template-columns:1fr;gap:1.6rem}
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  .nav-links{position:fixed;top:82px;right:14px;left:14px;flex-direction:column;align-items:stretch;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:.8rem;box-shadow:0 20px 50px rgba(0,0,0,.14);display:none}
+  .nav-links.open{display:flex}
+  .burger{display:flex}
+  .story-in{grid-template-columns:1fr}.scol{border-right:0;border-bottom:1px solid var(--line)}
+  .pillars{grid-template-columns:1fr}
+  .q-row{grid-template-columns:repeat(2,1fr)}
+  .row{grid-template-columns:64px 1fr;gap:1rem}.rb{display:none}
+  .foot-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="ajrak"></div>
+
+<nav>
+  <a class="brand" href="#">
+    <div class="emblem">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <ellipse cx="12" cy="8" rx="3" ry="6" fill="rgba(142,27,61,.25)" stroke="rgba(142,27,61,.7)" stroke-width=".8"/>
+        <ellipse cx="12" cy="8" rx="3" ry="6" fill="rgba(142,27,61,.2)" stroke="rgba(142,27,61,.6)" stroke-width=".8" transform="rotate(60 12 12)"/>
+        <ellipse cx="12" cy="8" rx="3" ry="6" fill="rgba(142,27,61,.2)" stroke="rgba(142,27,61,.6)" stroke-width=".8" transform="rotate(-60 12 12)"/>
+        <circle cx="12" cy="12" r="3.5" fill="rgba(142,27,61,.3)" stroke="rgba(142,27,61,.8)" stroke-width=".8"/>
+        <path d="M4 19 Q8 16 12 19 Q16 22 20 19" stroke="rgba(30,58,138,.6)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div><div class="brand-name">SCNC</div><div class="brand-sub">Sindhi Community · Bay Area</div></div>
+  </a>
+  <button class="burger" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="nav">
+    <li><a href="#">Home</a></li>
+    <li><a href="#heritage">Heritage</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#give">Give</a></li>
+    <li><a href="#" class="nav-cta">Member Login</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div>
+    <div class="h-kick"><b>Est. 2002</b><span>Bay Area · 501(c)(3)</span></div>
+    <h1>
+      <span class="l1">The Sindhu</span>
+      <span class="l2">Spirit</span>
+      <span class="l3">alive in the Bay Area</span>
+    </h1>
+    <div class="verse">
+      <p>"Seek not the far shores, traveller — the river you long for already carries you home."</p>
+      <cite>— after Shah Abdul Latif Bhittai · Shah Jo Risalo</cite>
+    </div>
+    <p class="hero-desc">One of the world's oldest living cultures, carried across continents and gathered here — in our music, our Ajrak, our festivals, and the faith of Jhulelal. This is where we keep it whole.</p>
+    <div class="actions">
+      <a href="#give" class="btn btn-fill">Stand with us</a>
+      <a href="#heritage" class="btn btn-ghost">Explore our heritage →</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="pat"></div><div class="diamond"></div>
+    <div class="cap">
+      <div class="t">Textile · Identity</div>
+      <h3>Ajrak — the cloth of civilization</h3>
+      <p>Block-printed in indigo and crimson since antiquity. Not decoration — heritage you can wear.</p>
+    </div>
+  </div>
+</header>
+
+<!-- STORY -->
+<section class="story" id="heritage">
+  <div class="story-in">
+    <div class="scol">
+      <div class="n">01</div>
+      <div class="era">Ancient roots</div>
+      <h3>Born of the Indus</h3>
+      <p class="drop">From the banks of the River Sindhu rose one of humanity's first great civilizations — five thousand years of art, trade, and devotion that still run in our blood.</p>
+    </div>
+    <div class="scol">
+      <div class="n">02</div>
+      <div class="era">Around the world</div>
+      <h3>A people without borders</h3>
+      <p>Sindhis have made homes on six continents — Dubai, Hong Kong, London, Singapore, New York. Wherever we settle, we carry the culture with us and plant it anew.</p>
+    </div>
+    <div class="scol">
+      <div class="n">03</div>
+      <div class="era">Bay Area · 2002–today</div>
+      <h3>Rooted in Fremont</h3>
+      <p>SCNC was founded to keep that flame burning here — through Cheti Chand, Diwali, the weekly aarti, and the bonds that turn neighbours into family.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="section reveal">
+  <div class="label"><span class="pill">Symbols of identity</span></div>
+  <h2 class="h2">Three threads of the <em>Sindhu Spirit</em></h2>
+  <p class="sub">Every part of who we are is woven from art, water, and devotion — rooted in one of the oldest living cultures on earth.</p>
+  <div class="pillars">
+    <div class="pillar feat">
+      <div class="pv pv-ajrak"><div class="p"></div><div class="c"></div></div>
+      <div class="pb"><div class="tag">Textile · Identity</div><h3>Ajrak — the sacred cloth</h3>
+        <p>Block-printed in deep indigo and crimson with techniques passed down for millennia, Ajrak is the soul of Sindhi identity. Worn by farmers and presidents alike, its geometry encodes the stars, the rivers, and our beliefs. Every motif tells a story.</p></div>
+    </div>
+    <div class="pillar">
+      <div class="pv pv-river"><div class="w"></div><div class="w w2"></div>
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(200,225,255,.85)" stroke-width="1.3" stroke-linecap="round"><path d="M3 8q4-3 9 0t9 0M3 14q4-3 9 0t9 0M3 20q4-3 9 0t9 0"/></svg>
+      </div>
+      <div class="pb"><div class="tag">Water · Origin</div><h3>The River Sindhu</h3>
+        <p>The Indus gave Sindhis their name. Water is sacred — Cheti Chand begins at its edge, calling the river-god Jhulelal.</p></div>
+    </div>
+    <div class="pillar">
+      <div class="pv pv-jhule">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none"><g transform="translate(50,50)">
+          <ellipse rx="10" ry="28" fill="rgba(251,242,222,.55)"/><ellipse rx="10" ry="28" fill="rgba(251,242,222,.45)" transform="rotate(45)"/>
+          <ellipse rx="10" ry="28" fill="rgba(251,242,222,.45)" transform="rotate(90)"/><ellipse rx="10" ry="28" fill="rgba(251,242,222,.45)" transform="rotate(135)"/>
+          <ellipse rx="10" ry="28" fill="rgba(251,242,222,.55)" transform="rotate(180)"/><ellipse rx="10" ry="28" fill="rgba(251,242,222,.45)" transform="rotate(225)"/>
+          <ellipse rx="10" ry="28" fill="rgba(251,242,222,.45)" transform="rotate(270)"/><ellipse rx="10" ry="28" fill="rgba(251,242,222,.45)" transform="rotate(315)"/>
+          <circle r="14" fill="rgba(251,242,222,.7)"/><circle r="7" fill="rgba(255,255,255,.6)"/></g></svg>
+      </div>
+      <div class="pb"><div class="tag">Devotion · Protection</div><h3>Jhulelal</h3>
+        <p>Seated on a lotus upon a Palla fish, Jhulelal — the water deity — is guardian of the Sindhi people. Every aarti calls his name.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RALLI divider -->
+<div class="ralli"><i style="background:#8E1B3D"></i><i style="background:#1E3A8A"></i><i style="background:#A9762A"></i><i style="background:#8E1B3D"></i><i style="background:#EFE3C9"></i><i style="background:#1E3A8A"></i><i style="background:#8E1B3D"></i><i style="background:#A9762A"></i><i style="background:#EFE3C9"></i><i style="background:#8E1B3D"></i><i style="background:#1E3A8A"></i><i style="background:#A9762A"></i></div>
+
+<!-- SEVEN QUEENS -->
+<section class="queens">
+  <div class="queens-in reveal">
+    <div class="label"><span class="pill">Folklore · Courage</span></div>
+    <h2 class="h2">The Seven Queens of Sindh</h2>
+    <p class="sub">In Shah Latif's Risalo, seven heroines stand for the strength of ordinary people — choosing love, loyalty, and dignity over fear. For centuries they have taught Sindhis, and especially Sindhi women, to stand tall.</p>
+    <div class="q-row">
+      <div class="queen"><div class="ring">M</div><div class="nm">Marvi</div><div class="vt">Homeland</div></div>
+      <div class="queen"><div class="ring">S</div><div class="nm">Sassui</div><div class="vt">Perseverance</div></div>
+      <div class="queen"><div class="ring">S</div><div class="nm">Sohni</div><div class="vt">Courage</div></div>
+      <div class="queen"><div class="ring">M</div><div class="nm">Momal</div><div class="vt">Love</div></div>
+      <div class="queen"><div class="ring">N</div><div class="nm">Noori</div><div class="vt">Humility</div></div>
+      <div class="queen"><div class="ring">S</div><div class="nm">Sorath</div><div class="vt">Sacrifice</div></div>
+      <div class="queen"><div class="ring">L</div><div class="nm">Lila</div><div class="vt">Devotion</div></div>
+    </div>
+    <p class="q-note">"Those who keep the faith, the river itself will carry across." — the lesson of the heroines</p>
+  </div>
+</section>
+
+<!-- LIVING CULTURE -->
+<section class="section reveal">
+  <div class="label"><span class="pill">Living culture</span></div>
+  <h2 class="h2">Rich in every sense</h2>
+  <p class="sub">From the fragrance of Sindhi Kadhi to the dhamal at a Sufi shrine — our heritage is alive, joyful, and always shared.</p>
+  <div class="culture">
+    <div class="cc"><div class="top t-food"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#A9762A" stroke-width="1.4" stroke-linecap="round"><path d="M4 13h16a8 8 0 0 1-16 0z"/><path d="M2 21h20"/><path d="M9 5c0-1 .8-2 0-3M13 5c0-1 .8-2 0-3"/></svg></div>
+      <div class="cb"><div class="tag">Cuisine</div><h3>Sindhi food</h3><p>Daal Pakwan, Sindhi Kadhi, Koki, Sai Bhaji — flavours shaped by centuries of trade across the Middle East, Central Asia, and South Asia.</p></div></div>
+    <div class="cc"><div class="top t-music"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#1E3A8A" stroke-width="1.4" stroke-linecap="round"><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M9 18V5l11-2v13"/></svg></div>
+      <div class="cb"><div class="tag">Music & poetry</div><h3>Sufi music & Sindhi Bait</h3><p>Sung poetry, the dhamal, and the soulful verses of Shah Latif — devotional, joyful, and deeply communal.</p></div></div>
+    <div class="cc"><div class="top t-craft"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#8E1B3D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v4H3z"/><path d="M5 11l2 10M19 11l-2 10M9 11v10M15 11v10"/></svg></div>
+      <div class="cb"><div class="tag">Craft</div><h3>Ralli & handicrafts</h3><p>Ralli patchwork quilts — stitched by women sharing stories — and intricate embroidery, passed mother to daughter.</p></div></div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="events-in reveal">
+    <div class="label"><span class="pill">Programs 2025</span></div>
+    <h2 class="h2">This year's gatherings</h2>
+    <p class="sub">Every event is a celebration — of heritage, of togetherness, of the spirit that connects us.</p>
+    <div class="ev-list">
+      <div class="row flag">
+        <div class="rd"><div class="m">Oct</div><div class="d sm">2025</div></div>
+        <div class="ri"><div class="tags"><span class="tg tg-flag">★ Flagship</span><span class="tg tg-cul">Gala</span></div><h4>Annual Diwali Gala 2025</h4><div class="loc">Bay Area Venue · Dinner, cultural performances & celebration</div></div>
+        <a href="#" class="rb rb-fill">Buy tickets</a>
+      </div>
+      <div class="row">
+        <div class="rd"><div class="m">Apr</div><div class="d">7</div></div>
+        <div class="ri"><div class="tags"><span class="tg tg-rel">Religious</span><span class="tg tg-rel">Annual</span></div><h4>Cheti Chand — Sindhi New Year</h4><div class="loc">Bay Area Temple · Birth of Jhulelal</div></div>
+        <a href="#" class="rb rb-out">Register</a>
+      </div>
+      <div class="row">
+        <div class="rd"><div class="m">Aug</div><div class="d">4</div></div>
+        <div class="ri"><div class="tags"><span class="tg tg-fam">Family</span><span class="tg tg-fam">Community</span></div><h4>Picnic in the Park</h4><div class="loc">Bay Area Park · Food, games & togetherness</div></div>
+        <a href="#" class="rb rb-out">RSVP free</a>
+      </div>
+      <div class="row">
+        <div class="rd"><div class="m">Sep</div><div class="d">14</div></div>
+        <div class="ri"><div class="tags"><span class="tg tg-spi">Spiritual</span></div><h4>Satnarayan Katha</h4><div class="loc">Fremont Temple</div></div>
+        <a href="#" class="rb rb-out">Register</a>
+      </div>
+      <div class="row">
+        <div class="rd"><div class="m">Nov</div><div class="d">16</div></div>
+        <div class="ri"><div class="tags"><span class="tg tg-rel">Religious</span><span class="tg tg-rel">Annual</span></div><h4>Guru Nanak Janam Celebrations</h4><div class="loc">Sunnyvale Gurdwara</div></div>
+        <a href="#" class="rb rb-out">Register</a>
+      </div>
+    </div>
+    <div class="recur">
+      <span>Weekly Jhulelal Aarti — Fremont & Sunnyvale</span>
+      <span>Monthly Chandu Aarti & Palav</span>
+      <span>Sadhu Vaswani Satsang · Sindhi Tipno 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- GIVE / JOIN band -->
+<section id="give">
+  <div class="band-in reveal">
+    <div class="band">
+      <div class="band-l">
+        <h2>We have no borders.<br>We have <em>each other.</em></h2>
+        <p>SCNC is the Bay Area's Sindhi home — 500+ families carrying thousands of years of culture forward, together. Your support funds the gatherings that keep it all alive. As a 501(c)(3), every gift is tax-deductible, and through Zeffy 100% reaches the community.</p>
+      </div>
+      <div class="band-r">
+        <a href="#" class="btn btn-cream">Make a donation</a>
+        <a href="#" class="btn btn-line">Become a member · $25/yr</a>
+        <div class="band-note">0% platform fees · Tax-deductible · Secure</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="ajrak"></div>
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <div class="fb-name">SCNC</div>
+      <p>Sindhi Community of Northern California — the Sindhu spirit, alive in the Bay Area.</p>
+      <div class="socials"><a href="#">f</a><a href="#">in</a><a href="#">▶</a><a href="#">◎</a></div>
+    </div>
+    <div class="foot-col"><h4>Heritage</h4><ul><li><a href="#heritage">Our Story</a></li><li><a href="#">Board Members</a></li><li><a href="#">Seven Queens</a></li><li><a href="#">Store</a></li></ul></div>
+    <div class="foot-col"><h4>Programs</h4><ul><li><a href="#events">2025 Events</a></li><li><a href="#">Diwali Gala</a></li><li><a href="#">Cheti Chand</a></li><li><a href="#">Sindhi Tipno</a></li></ul></div>
+    <div class="foot-col foot-contact"><h4>Visit / Contact</h4><p>39270 Paseo Padre Pkwy, Suite&nbsp;#321<br>Fremont, CA 94538</p><p>(510) 972-4660</p><p>info@sindhicommunity.org</p></div>
+  </div>
+  <div class="foot-bottom"><div class="fb-in"><p>© 2025 Sindhi Community of Northern California. All rights reserved.</p><span class="badge501">★ 501(c)(3) Verified Nonprofit</span></div></div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('#nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open')));
+</script>
+</body>
+</html>

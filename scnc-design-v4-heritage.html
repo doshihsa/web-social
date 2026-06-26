@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCNC — Design V4: Terracotta & Heritage</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terra: #C2410C;
+    --terra-light: #EA580C;
+    --terra-pale: #FFF7ED;
+    --terra-muted: #FED7AA;
+    --forest: #166534;
+    --forest-light: #16A34A;
+    --ivory: #FEFCE8;
+    --ivory-dark: #FEF9C3;
+    --cream: #FFFBF5;
+    --bark: #292524;
+    --sand: #78716C;
+    --sand-light: #A8A29E;
+    --border: rgba(194,65,12,0.15);
+    --border-light: rgba(194,65,12,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--bark); }
+
+  /* VERSION BADGE */
+  .version-bar {
+    background: var(--terra);
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* DECORATIVE TOP BORDER */
+  .top-border {
+    height: 8px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--terra) 0, var(--terra) 8px,
+      var(--ivory-dark) 8px, var(--ivory-dark) 10px,
+      var(--forest) 10px, var(--forest) 18px,
+      var(--ivory-dark) 18px, var(--ivory-dark) 20px
+    );
+  }
+
+  /* NAV */
+  nav {
+    padding: 0 2.5rem;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+
+  .logo { display: flex; align-items: center; gap: 1rem; }
+
+  .logo-emblem {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--terra);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--terra);
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    background: var(--terra-pale);
+  }
+
+  .logo-text-wrap .name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--bark);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .logo-text-wrap .sub {
+    font-size: 0.6rem;
+    color: var(--sand);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .nav-links { list-style: none; display: flex; gap: 0.25rem; align-items: center; }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    color: var(--sand);
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover { color: var(--bark); background: var(--terra-pale); }
+
+  .nav-cta {
+    background: var(--terra) !important;
+    color: white !important;
+    padding: 0.45rem 1.1rem !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+  }
+
+  /* HERO — editorial layout */
+  .hero {
+    background: var(--ivory);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 5rem 3rem 5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .overline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .overline-badge {
+    background: var(--terra-pale);
+    border: 1px solid rgba(194,65,12,0.25);
+    color: var(--terra);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+  }
+
+  .overline-dot { color: var(--sand-light); font-size: 0.7rem; }
+  .overline-text { font-size: 0.72rem; color: var(--sand); letter-spacing: 0.06em; }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--bark);
+    margin-bottom: 0.75rem;
+  }
+
+  .h1-accent { color: var(--terra); }
+
+  .hero-lede {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--sand);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 420px;
+  }
+
+  .hero-actions { display: flex; gap: 0.75rem; margin-bottom: 3.5rem; }
+
+  .btn-primary {
+    background: var(--terra);
+    color: white;
+    padding: 0.8rem 1.75rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--terra-light); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--bark);
+    padding: 0.8rem 1.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.88rem;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: rgba(194,65,12,0.4); color: var(--terra); }
+
+  .hero-trust {
+    display: flex;
+    gap: 2rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2.5rem;
+  }
+
+  .trust-item { }
+
+  .trust-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--terra);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+
+  .trust-l { font-size: 0.75rem; color: var(--sand); }
+
+  /* Hero right */
+  .hero-right {
+    padding: 3rem 0 3rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .feature-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.2s;
+  }
+
+  .feature-card:hover { box-shadow: 0 4px 20px rgba(194,65,12,0.1); border-color: rgba(194,65,12,0.3); }
+
+  .feature-card.hero-next {
+    background: var(--terra);
+    border-color: transparent;
+    color: white;
+  }
+
+  .fc-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sand-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-next .fc-label { color: rgba(255,255,255,0.6); }
+
+  .fc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--bark);
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-next .fc-title { color: white; font-size: 1.2rem; }
+
+  .fc-desc { font-size: 0.78rem; color: var(--sand); line-height: 1.5; }
+  .hero-next .fc-desc { color: rgba(255,255,255,0.7); }
+
+  .fc-row { display: flex; gap: 1rem; }
+  .fc-row .feature-card { flex: 1; }
+
+  /* ABOUT */
+  .about {
+    padding: 6rem 2.5rem;
+    background: var(--cream);
+  }
+
+  .about-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .section-label-wrap { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+
+  .slabel {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--terra);
+  }
+
+  .sline { flex: 1; height: 1px; background: var(--border); }
+
+  .about-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--bark);
+    line-height: 1.25;
+    margin-bottom: 1.25rem;
+  }
+
+  .about-h2 em { color: var(--terra); font-style: italic; }
+
+  .about-body {
+    font-family: 'Lora', serif;
+    font-size: 0.98rem;
+    color: var(--sand);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+  }
+
+  .about-quote {
+    border-left: 3px solid var(--forest);
+    padding-left: 1.25rem;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--forest);
+    line-height: 1.65;
+  }
+
+  .pillars { display: flex; flex-direction: column; gap: 0; }
+
+  .pillar {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border-light);
+    transition: background 0.15s;
+    border-radius: 8px;
+  }
+
+  .pillar:last-child { border-bottom: none; }
+
+  .pillar-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--terra-pale);
+    border: 1px solid rgba(194,65,12,0.2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .pillar-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--bark);
+    margin-bottom: 0.2rem;
+  }
+
+  .pillar-desc { font-size: 0.78rem; color: var(--sand); line-height: 1.6; }
+
+  /* EVENTS */
+  .events {
+    background: var(--bark);
+    padding: 6rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .events::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(194,65,12,0.03) 0, rgba(194,65,12,0.03) 1px,
+      transparent 1px, transparent 40px
+    );
+  }
+
+  .events-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .events-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+
+  .events-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--ivory);
+    letter-spacing: -0.01em;
+  }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .ev {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(194,65,12,0.2);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .ev:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(194,65,12,0.45);
+    transform: translateY(-2px);
+  }
+
+  .ev.featured {
+    background: linear-gradient(135deg, rgba(194,65,12,0.2), rgba(234,88,12,0.12));
+    border-color: rgba(194,65,12,0.45);
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .ev-date-block {
+    text-align: center;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .ev-month {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terra-muted);
+    margin-bottom: 0.1rem;
+  }
+
+  .ev-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+  }
+
+  .ev-type {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .ev-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 0.35rem;
+  }
+
+  .ev-loc { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+
+  .ev-btn {
+    background: var(--terra);
+    color: white;
+    padding: 0.55rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* JOIN */
+  .join {
+    padding: 6rem 2.5rem;
+    background: var(--forest);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .join::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 50px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 50px);
+  }
+
+  .join-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  .join-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+
+  .join-sub { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.7; max-width: 460px; }
+
+  .join-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end; flex-shrink: 0; }
+
+  .btn-ivory {
+    background: var(--ivory);
+    color: var(--forest);
+    padding: 0.9rem 2.25rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+    letter-spacing: 0.01em;
+    transition: opacity 0.15s;
+  }
+
+  .btn-ivory:hover { opacity: 0.9; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bark);
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  footer p { color: rgba(255,255,255,0.3); font-size: 0.75rem; }
+
+  .footer-right { display: flex; gap: 1.5rem; align-items: center; }
+
+  .footer-right a { color: rgba(255,255,255,0.3); font-size: 0.75rem; text-decoration: none; }
+  .footer-right a:hover { color: rgba(255,255,255,0.6); }
+
+  .footer-badge {
+    background: rgba(22,101,52,0.25);
+    border: 1px solid rgba(22,101,52,0.4);
+    color: #4ADE80;
+    padding: 0.28rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+
+<div class="version-bar">Design Option V4 — Terracotta &amp; Heritage · sindhicommunity.org</div>
+<div class="top-border"></div>
+
+<nav>
+  <div class="logo">
+    <div class="logo-emblem">स</div>
+    <div class="logo-text-wrap">
+      <div class="name">SCNC</div>
+      <div class="sub">Sindhi Community · Northern California</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">Board</a></li>
+    <li><a href="#">Store</a></li>
+    <li><a href="#" class="nav-cta">Member Login</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="overline">
+      <div class="overline-badge">501(c)(3) Nonprofit</div>
+      <div class="overline-dot">·</div>
+      <div class="overline-text">Bay Area, California</div>
+    </div>
+
+    <h1>
+      Sindhi<br>
+      Community<br>
+      <span class="h1-accent">of Northern</span><br>
+      California
+    </h1>
+
+    <p class="hero-lede">
+      Keeping "Sindhyat" Alive — celebrating culture, language, and the bonds that unite generations of Sindhi families in the Bay Area.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">Become a Member</a>
+      <a href="#" class="btn-secondary">View 2025 Events</a>
+    </div>
+
+    <div class="hero-trust">
+      <div class="trust-item">
+        <div class="trust-n">500+</div>
+        <div class="trust-l">Bay Area Members</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-n">15+</div>
+        <div class="trust-l">Annual Events</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-n">30+</div>
+        <div class="trust-l">Years of Service</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!-- Next event card -->
+    <div class="feature-card hero-next">
+      <div class="fc-label">🪔 Next Flagship Event</div>
+      <div class="fc-title">Annual Diwali Gala 2025</div>
+      <div class="fc-desc">Bay Area's premier Sindhi cultural celebration — dinner, performances, and community. Tickets available now.</div>
+      <div style="margin-top:1rem;">
+        <a href="#" style="background:white; color:var(--terra); padding:0.5rem 1.25rem; border-radius:6px; font-size:0.82rem; font-weight:700; text-decoration:none; display:inline-block;">Get Tickets →</a>
+      </div>
+    </div>
+
+    <!-- Two smaller cards -->
+    <div class="fc-row">
+      <div class="feature-card">
+        <div class="fc-label">Community</div>
+        <div class="fc-title" style="font-size:1rem;">Member Portal</div>
+        <div class="fc-desc">Manage membership, renew dues, and access member benefits online.</div>
+        <a href="#" style="color:var(--terra); font-size:0.78rem; font-weight:600; text-decoration:none; display:inline-block; margin-top:0.75rem;">Sign in →</a>
+      </div>
+      <div class="feature-card">
+        <div class="fc-label">Culture</div>
+        <div class="fc-title" style="font-size:1rem;">Sindhi Tipno 2025</div>
+        <div class="fc-desc">The annual Sindhi calendar — order your copy for the year.</div>
+        <a href="#" style="color:var(--terra); font-size:0.78rem; font-weight:600; text-decoration:none; display:inline-block; margin-top:0.75rem;">Get copy →</a>
+      </div>
+    </div>
+
+    <!-- Donate strip -->
+    <div class="feature-card" style="background:var(--terra-pale); border-color:rgba(194,65,12,0.25); display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+      <div>
+        <div class="fc-label" style="color:var(--terra);">Support SCNC</div>
+        <div class="fc-title" style="font-size:0.95rem;">Make a Donation</div>
+        <div class="fc-desc" style="font-size:0.73rem;">100% goes to SCNC · Tax-deductible · 0% fees via Zeffy</div>
+      </div>
+      <a href="#" style="background:var(--terra); color:white; padding:0.5rem 1.1rem; border-radius:6px; font-size:0.8rem; font-weight:600; text-decoration:none; white-space:nowrap;">Donate ❤️</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-inner">
+    <div>
+      <div class="section-label-wrap">
+        <div class="slabel">Our Mission</div>
+        <div class="sline"></div>
+      </div>
+      <h2 class="about-h2">Preserving <em>Sindhyat</em> in the Bay Area</h2>
+      <p class="about-body">
+        To be a premier association of Northern California for promoting and preserving the culture, language, image, and values of the Sindhi Community. Based in California's San Francisco Bay Area, our association thrives on bringing the Sindhi Community together for cultural events, charitable causes, and volunteering opportunities.
+      </p>
+      <blockquote class="about-quote">
+        "We are grateful to all our mentors, distinguished members and the pillars of our community who are instrumental in supporting all our initiatives."
+      </blockquote>
+    </div>
+
+    <div>
+      <div class="section-label-wrap">
+        <div class="slabel">Focus Areas</div>
+        <div class="sline"></div>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon">🌏</div>
+          <div>
+            <div class="pillar-title">Global Events & Networking</div>
+            <div class="pillar-desc">Supporting Sindhi Sammelan and networking with sister organizations worldwide.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🙏</div>
+          <div>
+            <div class="pillar-title">Religious & Spiritual Events</div>
+            <div class="pillar-desc">Annual Cheti Chand, Guru Nanak Janam, weekly temple Aartis, monthly Chandu Aarti and Satsang with Geeta Paath.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🎭</div>
+          <div>
+            <div class="pillar-title">Cultural Celebrations</div>
+            <div class="pillar-desc">Annual Diwali Gala, Sindhi Tipno, picnics, and family events all year round.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤝</div>
+          <div>
+            <div class="pillar-title">Charitable & Volunteering</div>
+            <div class="pillar-desc">Community service, mentorship, and charitable giving opportunities for all members.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events">
+  <div class="events-inner">
+    <div class="events-top">
+      <div>
+        <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(194,65,12,0.7); margin-bottom:0.5rem;">Programs 2025</div>
+        <div class="events-h2">This Year's Events</div>
+      </div>
+      <a href="#" style="color:rgba(255,255,255,0.35); font-size:0.82rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem; transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">View full schedule →</a>
+    </div>
+
+    <div class="events-grid">
+      <!-- Featured Diwali Gala -->
+      <div class="ev featured">
+        <div class="ev-date-block">
+          <div class="ev-month">October</div>
+          <div class="ev-day">2025</div>
+        </div>
+        <div>
+          <div class="ev-type" style="color:var(--terra-muted);">★ Flagship Event of the Year</div>
+          <div class="ev-name" style="font-size:1.4rem;">Annual Diwali Gala 2025</div>
+          <div class="ev-loc">Bay Area Venue · Dinner, performances & Sindhi cultural celebration</div>
+        </div>
+        <button class="ev-btn">Buy Tickets</button>
+      </div>
+
+      <div class="ev">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem;">
+          <div class="ev-date-block" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.06);">
+            <div class="ev-month">Apr</div>
+            <div class="ev-day" style="font-size:1.4rem;">7</div>
+          </div>
+          <span style="font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.3); border:1px solid rgba(255,255,255,0.1); padding:0.2rem 0.6rem; border-radius:99px;">Religious</span>
+        </div>
+        <div class="ev-name">Cheti Chand Celebration</div>
+        <div class="ev-loc" style="margin-bottom:1rem;">📍 Bay Area Temple</div>
+        <a href="#" style="color:var(--terra-muted); font-size:0.75rem; font-weight:600; text-decoration:none;">Get tickets →</a>
+      </div>
+
+      <div class="ev">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem;">
+          <div class="ev-date-block" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.06);">
+            <div class="ev-month">Aug</div>
+            <div class="ev-day" style="font-size:1.4rem;">4</div>
+          </div>
+          <span style="font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.3); border:1px solid rgba(255,255,255,0.1); padding:0.2rem 0.6rem; border-radius:99px;">Community</span>
+        </div>
+        <div class="ev-name">Picnic in the Park</div>
+        <div class="ev-loc" style="margin-bottom:1rem;">📍 Bay Area Park</div>
+        <a href="#" style="color:var(--terra-muted); font-size:0.75rem; font-weight:600; text-decoration:none;">RSVP free →</a>
+      </div>
+
+      <div class="ev">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem;">
+          <div class="ev-date-block" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.06);">
+            <div class="ev-month">Sep</div>
+            <div class="ev-day" style="font-size:1.4rem;">14</div>
+          </div>
+          <span style="font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.3); border:1px solid rgba(255,255,255,0.1); padding:0.2rem 0.6rem; border-radius:99px;">Spiritual</span>
+        </div>
+        <div class="ev-name">Satnarayan Katha</div>
+        <div class="ev-loc" style="margin-bottom:1rem;">📍 Fremont Temple</div>
+        <a href="#" style="color:var(--terra-muted); font-size:0.75rem; font-weight:600; text-decoration:none;">Register →</a>
+      </div>
+
+      <div class="ev">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem;">
+          <div class="ev-date-block" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.06);">
+            <div class="ev-month">Nov</div>
+            <div class="ev-day" style="font-size:1.4rem;">16</div>
+          </div>
+          <span style="font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.3); border:1px solid rgba(255,255,255,0.1); padding:0.2rem 0.6rem; border-radius:99px;">Religious</span>
+        </div>
+        <div class="ev-name">Guru Nanak Janam Celebrations</div>
+        <div class="ev-loc" style="margin-bottom:1rem;">📍 Sunnyvale Gurdwara</div>
+        <a href="#" style="color:var(--terra-muted); font-size:0.75rem; font-weight:600; text-decoration:none;">Register →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section class="join">
+  <div class="join-inner">
+    <div>
+      <h2 class="join-h2">Be Part of the<br>SCNC Family</h2>
+      <p class="join-sub">Membership is $25/year — join as an official SCNC member, access the member portal, get event priority access, and help preserve Sindhi culture in the Bay Area.</p>
+    </div>
+    <div class="join-actions">
+      <a href="#" class="btn-ivory" style="padding:1rem 2.5rem; font-size:0.95rem;">Become a Member</a>
+      <a href="#" style="color:rgba(255,255,255,0.45); font-size:0.78rem; text-decoration:none;">Already a member? Sign in →</a>
+    </div>
+  </div>
+</section>
+
+<div class="top-border"></div>
+
+<footer>
+  <p>© 2025 Sindhi Community of Northern California · All rights reserved</p>
+  <div class="footer-right">
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">info@sindhicommunity.org</a>
+    <div class="footer-badge">✓ 501(c)(3)</div>
+  </div>
+</footer>
+
+</body>
+</html>

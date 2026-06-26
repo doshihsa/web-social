@@ -1,0 +1,2187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCNC — Design Mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #F97316;
+    --saffron-deep: #EA580C;
+    --maroon: #7F1D1D;
+    --maroon-light: #991B1B;
+    --gold: #D97706;
+    --gold-light: #F59E0B;
+    --cream: #FFFBF0;
+    --cream-dark: #FEF3C7;
+    --dark: #1C0A00;
+    --text: #292524;
+    --text-muted: #78716C;
+    --white: #FFFFFF;
+    --border: rgba(249,115,22,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── PAGE SWITCHER ─── */
+  .page-tabs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 0;
+    height: 44px;
+    border-bottom: 2px solid var(--saffron);
+  }
+
+  .page-tabs .brand {
+    color: var(--saffron);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    margin-right: 1.5rem;
+    white-space: nowrap;
+  }
+
+  .page-tabs button {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0 0.9rem;
+    height: 44px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+  }
+
+  .page-tabs button:hover { color: rgba(255,255,255,0.8); }
+  .page-tabs button.active { color: var(--saffron); border-bottom-color: var(--saffron); }
+
+  .page { display: none; padding-top: 44px; }
+  .page.active { display: block; }
+
+  /* ─── NAV ─── */
+  nav {
+    background: rgba(28, 10, 0, 0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    position: sticky;
+    top: 44px;
+    z-index: 100;
+    border-bottom: 1px solid rgba(249,115,22,0.2);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav-logo-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    color: white;
+    font-size: 1rem;
+  }
+
+  .nav-logo-text .name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: white;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  .nav-logo-text .tagline {
+    font-size: 0.65rem;
+    color: var(--saffron);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .nav-links a:hover { color: white; background: rgba(249,115,22,0.15); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-deep));
+    color: white !important;
+    padding: 0.45rem 1.1rem !important;
+    border-radius: 99px !important;
+    font-weight: 600 !important;
+  }
+
+  /* ─── PATTERN ─── */
+  .ajrak-pattern {
+    background-image:
+      repeating-linear-gradient(45deg, rgba(249,115,22,0.06) 0, rgba(249,115,22,0.06) 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(135deg, rgba(217,119,6,0.06) 0, rgba(217,119,6,0.06) 1px, transparent 0, transparent 50%);
+    background-size: 24px 24px;
+  }
+
+  .border-pattern {
+    background:
+      repeating-linear-gradient(90deg, var(--saffron) 0, var(--saffron) 4px, transparent 4px, transparent 20px),
+      repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 4px, transparent 4px, transparent 20px);
+    background-size: 20px 3px, 20px 3px;
+    background-position: 0 0, 10px 0;
+    height: 6px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 88vh;
+    background: linear-gradient(135deg, #1C0A00 0%, #450A0A 40%, #7C2D12 70%, #92400E 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(249,115,22,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(217,119,6,0.12) 0%, transparent 50%);
+  }
+
+  /* Geometric mandala-inspired background */
+  .hero-mandala {
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    opacity: 0.07;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-left {}
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(249,115,22,0.15);
+    border: 1px solid rgba(249,115,22,0.3);
+    color: var(--saffron);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title .highlight {
+    background: linear-gradient(135deg, var(--saffron), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-deep));
+    color: white;
+    padding: 0.85rem 2rem;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 20px rgba(249,115,22,0.35);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(249,115,22,0.45); }
+
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    padding: 0.85rem 2rem;
+    border-radius: 99px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: white; }
+
+  /* Hero right — stats cards */
+  .hero-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(249,115,22,0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+  }
+
+  .stat-card:first-child {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(217,119,6,0.1));
+    border-color: rgba(249,115,22,0.35);
+  }
+
+  .stat-icon {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+  }
+
+  .stat-label {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.78rem;
+    margin-top: 0.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .upcoming-event {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(249,115,22,0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    grid-column: 1 / -1;
+  }
+
+  .upcoming-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 0.75rem;
+  }
+
+  .upcoming-title {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .upcoming-date {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+  }
+
+  /* ─── SECTION COMMONS ─── */
+  .section {
+    padding: 5rem 2rem;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--saffron);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ─── MISSION ─── */
+  .mission-section {
+    background: var(--cream);
+  }
+
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .mission-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .mission-image-placeholder {
+    background: linear-gradient(135deg, #7C2D12, #92400E, #D97706);
+    height: 420px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mission-image-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 30px);
+  }
+
+  .mission-badge {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+
+  .mission-badge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--saffron);
+    line-height: 1;
+  }
+
+  .mission-badge-text {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+
+  .focus-areas {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .focus-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .focus-item:hover { border-color: rgba(249,115,22,0.4); box-shadow: 0 4px 20px rgba(249,115,22,0.1); }
+
+  .focus-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(217,119,6,0.08));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .focus-title {
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  .focus-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ─── EVENTS ─── */
+  .events-section {
+    background: linear-gradient(180deg, #1C0A00 0%, #2D1010 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .events-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(249,115,22,0.03) 0, rgba(249,115,22,0.03) 1px, transparent 1px, transparent 40px);
+  }
+
+  .events-section .section-title { color: white; }
+  .events-section .section-subtitle { color: rgba(255,255,255,0.55); }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .event-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(249,115,22,0.2);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .event-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(249,115,22,0.4);
+    box-shadow: 0 12px 40px rgba(249,115,22,0.15);
+  }
+
+  .event-card-header {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+  }
+
+  .event-card-header.diwali { background: linear-gradient(135deg, #7C2D12, #D97706); }
+  .event-card-header.cheti { background: linear-gradient(135deg, #164E63, #0891B2); }
+  .event-card-header.picnic { background: linear-gradient(135deg, #14532D, #16A34A); }
+  .event-card-header.guru { background: linear-gradient(135deg, #1E1B4B, #4F46E5); }
+  .event-card-header.katha { background: linear-gradient(135deg, #831843, #DB2777); }
+  .event-card-header.tipno { background: linear-gradient(135deg, #78350F, #F59E0B); }
+
+  .event-date-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 0.4rem 0.7rem;
+    text-align: center;
+  }
+
+  .event-date-badge .month {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--saffron);
+  }
+
+  .event-date-badge .day {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+  }
+
+  .event-card-body {
+    padding: 1.25rem;
+  }
+
+  .event-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .event-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.4rem;
+  }
+
+  .event-location {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .events-cta {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  /* ─── BOARD ─── */
+  .board-section {
+    background: white;
+  }
+
+  .board-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+
+  .board-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .board-card {
+    text-align: center;
+    padding: 1.75rem 1.25rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+    background: var(--cream);
+  }
+
+  .board-card:hover {
+    border-color: rgba(249,115,22,0.4);
+    box-shadow: 0 8px 32px rgba(249,115,22,0.1);
+    transform: translateY(-2px);
+  }
+
+  .board-card.featured {
+    background: linear-gradient(135deg, #7C2D12, #92400E);
+    border-color: transparent;
+    color: white;
+  }
+
+  .board-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: white;
+  }
+
+  .board-card.featured .board-avatar {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.4);
+  }
+
+  .board-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.25rem;
+  }
+
+  .board-card.featured .board-name { color: white; }
+
+  .board-role {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--saffron);
+  }
+
+  .board-card.featured .board-role { color: rgba(255,255,255,0.7); }
+
+  /* ─── PORTAL ─── */
+  .portal-section {
+    background: var(--cream);
+    min-height: 100vh;
+  }
+
+  .portal-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .portal-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+  }
+
+  .portal-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 0.35rem;
+  }
+
+  .portal-tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    border: none;
+    background: none;
+  }
+
+  .portal-tab.active {
+    background: white;
+    color: var(--saffron);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  .form-input:focus { border-color: var(--saffron); background: white; }
+
+  .btn-block {
+    width: 100%;
+    padding: 0.9rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-deep));
+    color: white;
+    margin-top: 0.5rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 16px rgba(249,115,22,0.3);
+  }
+
+  .form-divider {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    margin: 1rem 0;
+    position: relative;
+  }
+
+  .form-divider::before, .form-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .form-divider::before { left: 0; }
+  .form-divider::after { right: 0; }
+
+  .portal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .portal-feature {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+  }
+
+  .portal-feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(217,119,6,0.08));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 99px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .status-active { background: rgba(22,163,74,0.1); color: #16A34A; }
+  .status-pending { background: rgba(217,119,6,0.1); color: var(--gold); }
+  .status-lapsed { background: rgba(239,68,68,0.1); color: #DC2626; }
+
+  /* ─── PAYMENT ─── */
+  .payment-section {
+    background: var(--cream);
+    min-height: 100vh;
+  }
+
+  .payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .payment-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .payment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(249,115,22,0.12);
+    border-color: rgba(249,115,22,0.4);
+  }
+
+  .payment-card-header {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .payment-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .payment-icon.dues { background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(217,119,6,0.1)); }
+  .payment-icon.donate { background: linear-gradient(135deg, rgba(127,29,29,0.12), rgba(153,27,27,0.08)); }
+  .payment-icon.event { background: linear-gradient(135deg, rgba(30,64,175,0.1), rgba(37,99,235,0.08)); }
+  .payment-icon.store { background: linear-gradient(135deg, rgba(20,83,45,0.1), rgba(22,163,74,0.08)); }
+
+  .payment-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.2rem;
+  }
+
+  .payment-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .payment-card-footer {
+    padding: 1rem 2rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .payment-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .payment-price span {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  .payment-btn {
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-deep));
+    color: white;
+    padding: 0.55rem 1.25rem;
+    border-radius: 99px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(249,115,22,0.3);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    padding: 3.5rem 2rem 2rem;
+    border-top: 1px solid rgba(249,115,22,0.2);
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-brand p {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    max-width: 220px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .social-link {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover { background: rgba(249,115,22,0.2); color: var(--saffron); }
+
+  .footer-col h4 {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.6rem; }
+
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul li a:hover { color: rgba(255,255,255,0.8); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-bottom p {
+    color: rgba(255,255,255,0.3);
+    font-size: 0.75rem;
+  }
+
+  .nonprofit-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(249,115,22,0.1);
+    border: 1px solid rgba(249,115,22,0.2);
+    color: var(--saffron);
+    padding: 0.3rem 0.8rem;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── ABOUT PAGE ─── */
+  .about-hero {
+    background: linear-gradient(135deg, #1C0A00, #450A0A);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(249,115,22,0.04) 0, rgba(249,115,22,0.04) 1px, transparent 1px, transparent 40px);
+  }
+
+  .about-hero-content { position: relative; z-index: 1; }
+
+  .about-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .about-hero p {
+    color: rgba(255,255,255,0.6);
+    font-size: 1.1rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .about-story {
+    background: white;
+    padding: 5rem 2rem;
+  }
+
+  .about-story-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--maroon);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--saffron);
+  }
+
+  .about-body {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+
+  .about-body p { margin-bottom: 1rem; }
+
+  .focus-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* ─── MOBILE NAV ─── */
+  @media (max-width: 768px) {
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .mission-grid { grid-template-columns: 1fr; }
+    .events-grid { grid-template-columns: 1fr; }
+    .board-grid { grid-template-columns: 1fr 1fr; }
+    .portal-layout { grid-template-columns: 1fr; }
+    .payment-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .about-story-inner { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+    .page-tabs { overflow-x: auto; }
+  }
+
+  /* Membership status preview */
+  .member-status-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+  }
+
+  .member-status-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .progress-bar {
+    background: rgba(249,115,22,0.1);
+    height: 6px;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    width: 73%;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    margin: 1.25rem 0;
+  }
+
+  /* Scroll hint */
+  .scroll-hint {
+    text-align: center;
+    padding: 0.75rem 2rem;
+    background: rgba(249,115,22,0.05);
+    border-top: 1px solid rgba(249,115,22,0.1);
+    border-bottom: 1px solid rgba(249,115,22,0.1);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE SWITCHER -->
+<div class="page-tabs">
+  <div class="brand">SCNC Mockup</div>
+  <button class="active" onclick="showPage('home', this)">Home</button>
+  <button onclick="showPage('about', this)">About + Board</button>
+  <button onclick="showPage('events', this)">Events</button>
+  <button onclick="showPage('portal', this)">Member Portal</button>
+  <button onclick="showPage('payment', this)">Payment</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════════════════════ -->
+<div id="home" class="page active">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">स</div>
+      <div class="nav-logo-text">
+        <div class="name">SCNC</div>
+        <div class="tagline">Bay Area Sindhi Community</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Board</a></li>
+      <li><a href="#">Store</a></li>
+      <li><a href="#" class="nav-cta">Member Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="hero-mandala" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="300" cy="300" r="280" stroke="white" stroke-width="1"/>
+      <circle cx="300" cy="300" r="220" stroke="white" stroke-width="1"/>
+      <circle cx="300" cy="300" r="160" stroke="white" stroke-width="1"/>
+      <circle cx="300" cy="300" r="100" stroke="white" stroke-width="1"/>
+      <circle cx="300" cy="300" r="40" stroke="white" stroke-width="1"/>
+      <line x1="300" y1="20" x2="300" y2="580" stroke="white" stroke-width="0.5"/>
+      <line x1="20" y1="300" x2="580" y2="300" stroke="white" stroke-width="0.5"/>
+      <line x1="101" y1="101" x2="499" y2="499" stroke="white" stroke-width="0.5"/>
+      <line x1="499" y1="101" x2="101" y2="499" stroke="white" stroke-width="0.5"/>
+      <line x1="170" y1="34" x2="430" y2="566" stroke="white" stroke-width="0.3"/>
+      <line x1="34" y1="170" x2="566" y2="430" stroke="white" stroke-width="0.3"/>
+      <line x1="430" y1="34" x2="170" y2="566" stroke="white" stroke-width="0.3"/>
+      <line x1="566" y1="170" x2="34" y2="430" stroke="white" stroke-width="0.3"/>
+      <!-- Petals -->
+      <ellipse cx="300" cy="180" rx="30" ry="70" stroke="white" stroke-width="0.5"/>
+      <ellipse cx="300" cy="420" rx="30" ry="70" stroke="white" stroke-width="0.5"/>
+      <ellipse cx="180" cy="300" rx="70" ry="30" stroke="white" stroke-width="0.5"/>
+      <ellipse cx="420" cy="300" rx="70" ry="30" stroke="white" stroke-width="0.5"/>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span>🪔</span>
+          <span>501(c)(3) Nonprofit · Bay Area</span>
+        </div>
+        <h1 class="hero-title">
+          Keeping<br>
+          <span class="highlight">Sindhyat</span><br>
+          Alive
+        </h1>
+        <p class="hero-subtitle">
+          Sindhi Community of Northern California — uniting the Bay Area Sindhi diaspora through culture, celebration, and community since generations.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn-primary">Become a Member</a>
+          <a href="#" class="btn-outline">Explore Events →</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="stat-card">
+          <div class="stat-icon">🎉</div>
+          <div>
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Annual Events & Celebrations</div>
+          </div>
+        </div>
+        <div class="stat-card" style="background: rgba(255,255,255,0.04);">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Community Members</div>
+        </div>
+        <div class="stat-card" style="background: rgba(255,255,255,0.04);">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">Years of Legacy</div>
+        </div>
+        <div class="upcoming-event">
+          <div class="upcoming-label">🔥 Next Event</div>
+          <div class="upcoming-title">Annual Diwali Gala 2025</div>
+          <div class="upcoming-date">October 2025 · Bay Area</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="border-pattern"></div>
+  <div class="scroll-hint">↓ SCROLL TO EXPLORE — OR USE THE PAGE TABS ABOVE TO JUMP TO ANY PAGE ↓</div>
+
+  <!-- MISSION -->
+  <section class="section mission-section">
+    <div class="section-inner">
+      <div class="section-label">Our Purpose</div>
+      <h2 class="section-title">Preserving Culture,<br>Building Community</h2>
+
+      <div class="mission-grid">
+        <div class="mission-image">
+          <div class="mission-image-placeholder">
+            🪔
+            <div class="mission-badge">
+              <div class="mission-badge-num">501(c)(3)</div>
+              <div class="mission-badge-text">Nonprofit Organization</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="section-subtitle" style="margin-bottom: 1.5rem;">
+            To be a premier association of Northern California for promoting and preserving the culture, language, image and values of the Sindhi Community.
+          </p>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; margin-bottom: 2rem;">
+            Based in California's San Francisco Bay Area, our association thrives on bringing the Sindhi Community together for various cultural events, charitable causes, and volunteering opportunities.
+          </p>
+
+          <div class="focus-areas">
+            <div class="focus-item">
+              <div class="focus-icon">🌏</div>
+              <div>
+                <div class="focus-title">Global Events & Networking</div>
+                <div class="focus-desc">Supporting Sindhi Sammelan and collaborating with sister organizations worldwide.</div>
+              </div>
+            </div>
+            <div class="focus-item">
+              <div class="focus-icon">🙏</div>
+              <div>
+                <div class="focus-title">Religious & Spiritual Events</div>
+                <div class="focus-desc">Annual Cheti Chand, Guru Nanak Janam, monthly Chandu Aarti, Sadhu Vaswani Satsang, and weekly temple Aartis.</div>
+              </div>
+            </div>
+            <div class="focus-item">
+              <div class="focus-icon">🎭</div>
+              <div>
+                <div class="focus-title">Cultural Celebrations</div>
+                <div class="focus-desc">Annual Diwali Gala, picnics, and family events celebrating Sindhi heritage.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS PREVIEW -->
+  <section class="section events-section">
+    <div class="section-inner">
+      <div class="section-label" style="color: var(--gold-light);">2025 Calendar</div>
+      <h2 class="section-title">Upcoming Events</h2>
+      <p class="section-subtitle">Join us for celebrations, spiritual gatherings, and community moments throughout the year.</p>
+
+      <div class="events-grid">
+        <div class="event-card">
+          <div class="event-card-header cheti">
+            🌊
+            <div class="event-date-badge"><div class="month">Apr</div><div class="day">7</div></div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-tag">Religious · Annual</div>
+            <div class="event-name">Cheti Chand Celebration</div>
+            <div class="event-location">📍 Bay Area Temple</div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-card-header picnic">
+            🌳
+            <div class="event-date-badge"><div class="month">Aug</div><div class="day">4</div></div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-tag">Community · Family</div>
+            <div class="event-name">Picnic in the Park</div>
+            <div class="event-location">📍 Bay Area Park</div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-card-header katha">
+            🕉️
+            <div class="event-date-badge"><div class="month">Sep</div><div class="day">14</div></div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-tag">Spiritual</div>
+            <div class="event-name">Satnarayan Katha</div>
+            <div class="event-location">📍 Fremont Temple</div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-card-header diwali">
+            🪔
+            <div class="event-date-badge"><div class="month">Oct</div><div class="day">TBD</div></div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-tag">★ Flagship Event</div>
+            <div class="event-name">Annual Diwali Gala 2025</div>
+            <div class="event-location">📍 Bay Area Venue</div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-card-header guru">
+            ✨
+            <div class="event-date-badge"><div class="month">Nov</div><div class="day">16</div></div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-tag">Religious · Annual</div>
+            <div class="event-name">Guru Nanak Janam Celebrations</div>
+            <div class="event-location">📍 Sunnyvale Gurdwara</div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-card-header tipno">
+            📅
+            <div class="event-date-badge"><div class="month">2025</div><div class="day">—</div></div>
+          </div>
+          <div class="event-card-body">
+            <div class="event-tag">Culture · Annual</div>
+            <div class="event-name">Sindhi Tipno 2025</div>
+            <div class="event-location">📍 Online + Print</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="events-cta">
+        <a href="#" class="btn-primary">View All Events & Buy Tickets</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="name">SCNC</div>
+          <p>Sindhi Community of Northern California — keeping Sindhyat alive in the Bay Area.</p>
+          <div class="social-links">
+            <a href="#" class="social-link">f</a>
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">▶</a>
+            <a href="#" class="social-link">✕</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Organization</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Board Members</a></li>
+            <li><a href="#">Volunteers</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="#">All Events</a></li>
+            <li><a href="#">Diwali Gala</a></li>
+            <li><a href="#">Sindhi Tipno</a></li>
+            <li><a href="#">Religious Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Membership</h4>
+          <ul>
+            <li><a href="#">Join SCNC</a></li>
+            <li><a href="#">Member Login</a></li>
+            <li><a href="#">Donate</a></li>
+            <li><a href="#">Newsletter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Sindhi Community of Northern California. All rights reserved.</p>
+        <div class="nonprofit-badge">🏛️ 501(c)(3) Nonprofit</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: ABOUT + BOARD
+════════════════════════════════════════════════════════ -->
+<div id="about" class="page">
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">स</div>
+      <div class="nav-logo-text">
+        <div class="name">SCNC</div>
+        <div class="tagline">Bay Area Sindhi Community</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#" style="color: var(--saffron);">About</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Board</a></li>
+      <li><a href="#">Store</a></li>
+      <li><a href="#" class="nav-cta">Member Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- ABOUT HERO -->
+  <div class="about-hero">
+    <div class="about-hero-content">
+      <div style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(249,115,22,0.15); border:1px solid rgba(249,115,22,0.3); color:var(--saffron); font-size:0.7rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:0.35rem 1rem; border-radius:99px; margin-bottom:1.5rem;">
+        Est. Bay Area · 501(c)(3)
+      </div>
+      <h1>About SCNC</h1>
+      <p>Keeping "Sindhyat" Alive — one celebration, one gathering, one generation at a time.</p>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <div class="about-story">
+    <div class="about-story-inner">
+      <div>
+        <div class="section-label" style="margin-bottom:1rem;">Our Story</div>
+        <blockquote class="about-quote">"To be a premier association of Northern California for promoting and preserving culture, language, image and values of the Sindhi Community."</blockquote>
+        <div class="about-body">
+          <p>Based in California's San Francisco Bay Area, our association thrives on bringing the Sindhi Community together for various cultural events, charitable causes, and volunteering opportunities.</p>
+          <p>Our organization is based on a non-profit model to best serve our community's needs. Our main goal is always to bring the Sindhi Community together by organizing cultural events and providing a platform for volunteering opportunities.</p>
+          <p>We are grateful to all our mentors, distinguished members, and the pillars of our community who are instrumental in supporting all our initiatives. Most of all, we are sincerely grateful to all members of the Sindhi Community who continue to motivate us.</p>
+        </div>
+      </div>
+
+      <div class="focus-grid">
+        <div class="section-label" style="margin-bottom:1rem;">Focus Areas</div>
+        <div class="focus-item">
+          <div class="focus-icon">🌏</div>
+          <div>
+            <div class="focus-title">Global Events & Networking</div>
+            <div class="focus-desc">Supporting Sindhi Sammelan and networking with sister organizations worldwide.</div>
+          </div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-icon">🙏</div>
+          <div>
+            <div class="focus-title">Religious Events</div>
+            <div class="focus-desc">Annual Cheti Chand & Guru Nanak Janam. Monthly Chandu Aarti and Palav, Sadhu Vaswani Satsang with Geeta Paath. Weekly Aarti of Jhulelal Sain at Fremont and Sunnyvale Temple.</div>
+          </div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-icon">🎭</div>
+          <div>
+            <div class="focus-title">Cultural Celebrations</div>
+            <div class="focus-desc">Annual Diwali Gala, Sindhi Tipno, picnics, and community family events.</div>
+          </div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-icon">🤝</div>
+          <div>
+            <div class="focus-title">Charitable & Volunteering</div>
+            <div class="focus-desc">Providing platforms for community service, mentorship, and charitable giving.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOARD SECTION -->
+  <section class="section board-section">
+    <div class="section-inner">
+      <div class="board-header">
+        <div>
+          <div class="section-label">Leadership</div>
+          <h2 class="section-title">Board Members</h2>
+        </div>
+        <p style="color:var(--text-muted); font-size:0.85rem; max-width:300px; text-align:right; line-height:1.6;">
+          A dedicated team of volunteers serving the Bay Area Sindhi community.
+        </p>
+      </div>
+
+      <div class="board-grid">
+        <!-- Officers first -->
+        <div class="board-card featured">
+          <div class="board-avatar">MS</div>
+          <div class="board-name">Mahendra Soneji</div>
+          <div class="board-role">President</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">BD</div>
+          <div class="board-name">Bharti Daswani</div>
+          <div class="board-role">Vice President</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">PG</div>
+          <div class="board-name">Pooja Gandhi</div>
+          <div class="board-role">Secretary</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">RA</div>
+          <div class="board-name">Raj Ahuja</div>
+          <div class="board-role">Treasurer</div>
+        </div>
+        <!-- Board members -->
+        <div class="board-card">
+          <div class="board-avatar">KD</div>
+          <div class="board-name">Kanchan Dharmani</div>
+          <div class="board-role">Jt. Treasurer</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">DA</div>
+          <div class="board-name">Devendra Alimchandani</div>
+          <div class="board-role">Event Support</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">SP</div>
+          <div class="board-name">Seema Panjabi</div>
+          <div class="board-role">Event Coordinator</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">BK</div>
+          <div class="board-name">Bhishma Kinger</div>
+          <div class="board-role">Jt. Legal Support</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">DM</div>
+          <div class="board-name">Deepa Malani</div>
+          <div class="board-role">Board Member</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">CB</div>
+          <div class="board-name">Chandru Bhambhra</div>
+          <div class="board-role">Board Member</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">AJ</div>
+          <div class="board-name">Ashish Jhurani</div>
+          <div class="board-role">Board Member</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">PC</div>
+          <div class="board-name">Parkash Chugani</div>
+          <div class="board-role">Board Member</div>
+        </div>
+        <div class="board-card">
+          <div class="board-avatar">PS</div>
+          <div class="board-name">Punam Shahani</div>
+          <div class="board-role">Board Member</div>
+        </div>
+      </div>
+
+      <!-- Volunteer CTA -->
+      <div style="margin-top:3rem; background:linear-gradient(135deg,#450A0A,#7C2D12); border-radius:20px; padding:3rem; display:flex; align-items:center; justify-content:space-between; gap:2rem;">
+        <div>
+          <div style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:white; margin-bottom:0.5rem;">The Backbone of Our Organization</div>
+          <p style="color:rgba(255,255,255,0.6); font-size:0.9rem; line-height:1.7; max-width:500px;">We couldn't do any of what we do without the volunteers who spend countless hours at every event. If you'd like to contribute, we'd love to have you.</p>
+        </div>
+        <a href="#" class="btn-primary" style="white-space:nowrap; flex-shrink:0;">Volunteer with Us</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none; padding-top:0;">
+        <p>© 2025 Sindhi Community of Northern California · 501(c)(3) Nonprofit</p>
+        <div class="nonprofit-badge">🏛️ info@sindhicommunity.org</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: EVENTS / PROGRAMS
+════════════════════════════════════════════════════════ -->
+<div id="events" class="page">
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">स</div>
+      <div class="nav-logo-text">
+        <div class="name">SCNC</div>
+        <div class="tagline">Bay Area Sindhi Community</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#" style="color:var(--saffron);">Events</a></li>
+      <li><a href="#">Board</a></li>
+      <li><a href="#">Store</a></li>
+      <li><a href="#" class="nav-cta">Member Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="about-hero">
+    <div class="about-hero-content">
+      <div style="display:inline-flex; align-items:center; gap:0.5rem; background:rgba(249,115,22,0.15); border:1px solid rgba(249,115,22,0.3); color:var(--saffron); font-size:0.7rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:0.35rem 1rem; border-radius:99px; margin-bottom:1.5rem;">
+        Programs 2025
+      </div>
+      <h1>Events & Programs</h1>
+      <p>A full year of celebration, spirituality, and community — join us at every milestone.</p>
+    </div>
+  </div>
+
+  <section class="section" style="background:white;">
+    <div class="section-inner">
+      <div class="section-label">Full Year Calendar</div>
+      <h2 class="section-title">2025 Schedule</h2>
+
+      <!-- Timeline style -->
+      <div style="margin-top:3rem; display:flex; flex-direction:column; gap:1.25rem;">
+
+        <!-- Event row -->
+        <div style="display:grid; grid-template-columns:120px 1fr auto; gap:1.5rem; align-items:center; background:var(--cream); border:1px solid var(--border); border-radius:16px; padding:1.5rem; border-left:4px solid var(--saffron);">
+          <div style="text-align:center;">
+            <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--saffron);">April</div>
+            <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--dark); line-height:1;">7</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">2025</div>
+          </div>
+          <div>
+            <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.4rem;">
+              <span style="background:rgba(8,145,178,0.1); color:#0891B2; font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">Religious</span>
+              <span style="background:rgba(22,163,74,0.1); color:#16A34A; font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">Annual</span>
+            </div>
+            <div style="font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--dark); margin-bottom:0.3rem;">Cheti Chand Celebration</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);">📍 Bay Area Temple · Celebrates the Sindhi New Year and the birth of Jhulelal</div>
+          </div>
+          <a href="#" class="btn-primary" style="white-space:nowrap; font-size:0.8rem; padding:0.6rem 1.25rem;">Get Tickets</a>
+        </div>
+
+        <div style="display:grid; grid-template-columns:120px 1fr auto; gap:1.5rem; align-items:center; background:var(--cream); border:1px solid var(--border); border-radius:16px; padding:1.5rem; border-left:4px solid #16A34A;">
+          <div style="text-align:center;">
+            <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#16A34A;">August</div>
+            <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--dark); line-height:1;">4</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">2025</div>
+          </div>
+          <div>
+            <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.4rem;">
+              <span style="background:rgba(22,163,74,0.1); color:#16A34A; font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">Family</span>
+              <span style="background:rgba(249,115,22,0.1); color:var(--saffron); font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">Community</span>
+            </div>
+            <div style="font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--dark); margin-bottom:0.3rem;">Picnic in the Park</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);">📍 Bay Area Park · Family fun, food, and community bonding</div>
+          </div>
+          <a href="#" class="btn-primary" style="white-space:nowrap; font-size:0.8rem; padding:0.6rem 1.25rem; background:linear-gradient(135deg,#16A34A,#15803D);">RSVP Free</a>
+        </div>
+
+        <div style="display:grid; grid-template-columns:120px 1fr auto; gap:1.5rem; align-items:center; background:var(--cream); border:1px solid var(--border); border-radius:16px; padding:1.5rem; border-left:4px solid #DB2777;">
+          <div style="text-align:center;">
+            <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#DB2777;">September</div>
+            <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--dark); line-height:1;">14</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">2025</div>
+          </div>
+          <div>
+            <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.4rem;">
+              <span style="background:rgba(219,39,119,0.1); color:#DB2777; font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">Spiritual</span>
+            </div>
+            <div style="font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--dark); margin-bottom:0.3rem;">Satnarayan Katha</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);">📍 Fremont Temple · Traditional prayer ceremony and katha</div>
+          </div>
+          <a href="#" class="btn-primary" style="white-space:nowrap; font-size:0.8rem; padding:0.6rem 1.25rem; background:linear-gradient(135deg,#DB2777,#9D174D);">Register</a>
+        </div>
+
+        <div style="display:grid; grid-template-columns:120px 1fr auto; gap:1.5rem; align-items:center; background:linear-gradient(135deg, rgba(124,45,18,0.06), rgba(217,119,6,0.06)); border:2px solid rgba(249,115,22,0.3); border-radius:16px; padding:1.5rem; border-left:4px solid var(--saffron);">
+          <div style="text-align:center;">
+            <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--saffron);">October</div>
+            <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--dark); line-height:1;">TBD</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">2025</div>
+          </div>
+          <div>
+            <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.4rem;">
+              <span style="background:rgba(249,115,22,0.15); color:var(--saffron); font-size:0.65rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">★ FLAGSHIP</span>
+              <span style="background:rgba(127,29,29,0.1); color:var(--maroon); font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">Gala</span>
+            </div>
+            <div style="font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--dark); margin-bottom:0.3rem;">Annual Diwali Gala 2025</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);">📍 Bay Area Venue · SCNC's biggest celebration of the year — dinner, performances & more</div>
+          </div>
+          <a href="#" class="btn-primary" style="white-space:nowrap; font-size:0.8rem; padding:0.6rem 1.25rem;">Buy Tickets</a>
+        </div>
+
+        <div style="display:grid; grid-template-columns:120px 1fr auto; gap:1.5rem; align-items:center; background:var(--cream); border:1px solid var(--border); border-radius:16px; padding:1.5rem; border-left:4px solid #4F46E5;">
+          <div style="text-align:center;">
+            <div style="font-size:0.65rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#4F46E5;">November</div>
+            <div style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--dark); line-height:1;">16</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">2025</div>
+          </div>
+          <div>
+            <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.4rem;">
+              <span style="background:rgba(79,70,229,0.1); color:#4F46E5; font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">Religious</span>
+              <span style="background:rgba(79,70,229,0.1); color:#4F46E5; font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:99px;">Annual</span>
+            </div>
+            <div style="font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--dark); margin-bottom:0.3rem;">Guru Nanak Janam Celebrations</div>
+            <div style="font-size:0.82rem; color:var(--text-muted);">📍 Sunnyvale Gurdwara · Celebrating the birth anniversary of Guru Nanak Dev Ji</div>
+          </div>
+          <a href="#" class="btn-primary" style="white-space:nowrap; font-size:0.8rem; padding:0.6rem 1.25rem; background:linear-gradient(135deg,#4F46E5,#3730A3);">Register</a>
+        </div>
+      </div>
+
+      <!-- Recurring events -->
+      <div style="margin-top:3rem; background:linear-gradient(135deg,#1C0A00,#450A0A); border-radius:20px; padding:2.5rem;">
+        <div style="color:var(--saffron); font-size:0.7rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.75rem;">Recurring</div>
+        <div style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:white; margin-bottom:1.5rem;">Monthly & Weekly Events</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div style="background:rgba(255,255,255,0.07); border-radius:12px; padding:1rem 1.25rem; display:flex; gap:1rem; align-items:center;">
+            <span style="font-size:1.5rem;">🙏</span>
+            <div>
+              <div style="color:white; font-weight:600; font-size:0.9rem; margin-bottom:0.2rem;">Weekly Aarti</div>
+              <div style="color:rgba(255,255,255,0.5); font-size:0.75rem;">Jhulelal Sain — Fremont & Sunnyvale Temple</div>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,0.07); border-radius:12px; padding:1rem 1.25rem; display:flex; gap:1rem; align-items:center;">
+            <span style="font-size:1.5rem;">📿</span>
+            <div>
+              <div style="color:white; font-weight:600; font-size:0.9rem; margin-bottom:0.2rem;">Monthly Aarti & Satsang</div>
+              <div style="color:rgba(255,255,255,0.5); font-size:0.75rem;">Chandu Aarti, Palav, Sadhu Vaswani Satsang</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none; padding-top:0;">
+        <p>© 2025 Sindhi Community of Northern California · 501(c)(3) Nonprofit</p>
+        <div class="nonprofit-badge">🏛️ info@sindhicommunity.org</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: MEMBER PORTAL
+════════════════════════════════════════════════════════ -->
+<div id="portal" class="page">
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">स</div>
+      <div class="nav-logo-text">
+        <div class="name">SCNC</div>
+        <div class="tagline">Bay Area Sindhi Community</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Board</a></li>
+      <li><a href="#">Store</a></li>
+      <li><a href="#" class="nav-cta" style="background:var(--maroon);">Member Portal</a></li>
+    </ul>
+  </nav>
+
+  <section class="section portal-section">
+    <div class="section-inner">
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;">
+
+        <!-- Login/Signup form -->
+        <div>
+          <div class="section-label">Members</div>
+          <h2 class="section-title" style="margin-bottom:2rem;">Member Portal</h2>
+
+          <div class="portal-card">
+            <div class="portal-tabs">
+              <button class="portal-tab active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+              <button class="portal-tab" id="tab-signup" onclick="switchTab('signup')">Join SCNC</button>
+            </div>
+
+            <!-- Login form -->
+            <div id="form-login">
+              <div class="form-group">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-input" placeholder="you@example.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" placeholder="••••••••">
+              </div>
+              <div style="text-align:right; margin-top:-0.5rem; margin-bottom:1rem;">
+                <a href="#" style="font-size:0.78rem; color:var(--saffron); text-decoration:none;">Forgot password?</a>
+              </div>
+              <button class="btn-block">Sign In to Portal</button>
+              <div class="form-divider">or</div>
+              <p style="text-align:center; font-size:0.8rem; color:var(--text-muted);">
+                Not a member yet? <a href="#" style="color:var(--saffron); font-weight:600; text-decoration:none;" onclick="switchTab('signup'); return false;">Join SCNC →</a>
+              </p>
+            </div>
+
+            <!-- Signup form -->
+            <div id="form-signup" style="display:none;">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">First name</label>
+                  <input type="text" class="form-input" placeholder="Arjun">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last name</label>
+                  <input type="text" class="form-input" placeholder="Lalwani">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-input" placeholder="you@example.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone (optional)</label>
+                <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" placeholder="Create a strong password">
+              </div>
+              <div style="background:rgba(249,115,22,0.06); border:1px solid rgba(249,115,22,0.2); border-radius:10px; padding:0.85rem 1rem; margin-bottom:1rem; font-size:0.78rem; color:var(--text-muted); line-height:1.6;">
+                🪔 After signing up, you'll be directed to complete your membership dues via our secure payment partner (Zeffy) — 100% goes to SCNC.
+              </div>
+              <button class="btn-block">Create My Account</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member dashboard preview -->
+        <div>
+          <div style="font-size:0.7rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">Member Dashboard Preview</div>
+
+          <!-- Status card -->
+          <div class="member-status-card">
+            <div class="member-status-top">
+              <div>
+                <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:0.25rem;">Welcome back,</div>
+                <div style="font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--dark);">Arjun Lalwani</div>
+              </div>
+              <div class="status-badge status-active">● Active Member</div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+              <div>
+                <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:0.2rem;">Member Since</div>
+                <div style="font-weight:600; font-size:0.9rem; color:var(--dark);">March 2024</div>
+              </div>
+              <div>
+                <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:0.2rem;">Renews On</div>
+                <div style="font-weight:600; font-size:0.9rem; color:var(--dark);">March 2026</div>
+              </div>
+            </div>
+            <div style="margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:0.72rem; color:var(--text-muted);">Membership year progress</span>
+              <span style="font-size:0.72rem; font-weight:600; color:var(--saffron);">73%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+          </div>
+
+          <!-- Quick actions -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.25rem;">
+            <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:1rem; text-align:center; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(249,115,22,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem; margin-bottom:0.4rem;">🎟️</div>
+              <div style="font-size:0.78rem; font-weight:600; color:var(--dark);">Buy Event Tickets</div>
+            </div>
+            <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:1rem; text-align:center; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(249,115,22,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem; margin-bottom:0.4rem;">💳</div>
+              <div style="font-size:0.78rem; font-weight:600; color:var(--dark);">Renew Membership</div>
+            </div>
+            <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:1rem; text-align:center; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(249,115,22,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem; margin-bottom:0.4rem;">✏️</div>
+              <div style="font-size:0.78rem; font-weight:600; color:var(--dark);">Edit Profile</div>
+            </div>
+            <div style="background:white; border:1px solid var(--border); border-radius:12px; padding:1rem; text-align:center; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(249,115,22,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:1.5rem; margin-bottom:0.4rem;">❤️</div>
+              <div style="font-size:0.78rem; font-weight:600; color:var(--dark);">Donate</div>
+            </div>
+          </div>
+
+          <!-- Features list -->
+          <div class="portal-feature">
+            <div class="portal-feature-icon">🔒</div>
+            <div>
+              <div style="font-weight:600; font-size:0.88rem; color:var(--dark); margin-bottom:0.2rem;">Secure & Private</div>
+              <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.5;">Your data is encrypted and you only ever see your own records. Powered by Supabase.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none; padding-top:0;">
+        <p>© 2025 Sindhi Community of Northern California · 501(c)(3) Nonprofit</p>
+        <div class="nonprofit-badge">🏛️ info@sindhicommunity.org</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PAGE: PAYMENT
+════════════════════════════════════════════════════════ -->
+<div id="payment" class="page">
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">स</div>
+      <div class="nav-logo-text">
+        <div class="name">SCNC</div>
+        <div class="tagline">Bay Area Sindhi Community</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Board</a></li>
+      <li><a href="#" class="nav-cta">Member Login</a></li>
+    </ul>
+  </nav>
+
+  <section class="section payment-section">
+    <div class="section-inner">
+      <div style="text-align:center; margin-bottom:1rem;">
+        <div class="section-label" style="justify-content:center;">Powered by Zeffy — 0% fees for nonprofits</div>
+        <h2 class="section-title" style="margin:0 auto 0.75rem;">Pay & Support SCNC</h2>
+        <p style="color:var(--text-muted); font-size:0.95rem; max-width:480px; margin:0 auto; line-height:1.7;">
+          Every dollar goes directly to SCNC. We use Zeffy, which charges 0% platform fees to nonprofits — 100% of your payment reaches us.
+        </p>
+      </div>
+
+      <div class="payment-grid">
+        <div class="payment-card">
+          <div class="payment-card-header">
+            <div class="payment-icon dues">🪪</div>
+            <div>
+              <div class="payment-title">Annual Membership Dues</div>
+              <div class="payment-desc">Become or renew as an official SCNC member. Includes event priority access and member newsletter.</div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <div>
+              <div class="payment-price">$25 <span>/ year</span></div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.15rem;">Individual · Family rates available</div>
+            </div>
+            <button class="payment-btn">Pay Dues →</button>
+          </div>
+        </div>
+
+        <div class="payment-card">
+          <div class="payment-card-header">
+            <div class="payment-icon donate">❤️</div>
+            <div>
+              <div class="payment-title">Make a Donation</div>
+              <div class="payment-desc">Support SCNC's events, charitable causes, and community programs with a tax-deductible donation.</div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <div>
+              <div class="payment-price">Any <span>amount</span></div>
+              <div style="font-size:0.72rem; color:#16A34A; margin-top:0.15rem;">✓ Tax-deductible · 501(c)(3)</div>
+            </div>
+            <button class="payment-btn" style="background:linear-gradient(135deg,var(--maroon-light),var(--maroon));">Donate →</button>
+          </div>
+        </div>
+
+        <div class="payment-card">
+          <div class="payment-card-header">
+            <div class="payment-icon event">🎟️</div>
+            <div>
+              <div class="payment-title">Event Tickets</div>
+              <div class="payment-desc">Purchase tickets for the Annual Diwali Gala, Cheti Chand, and other SCNC events.</div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <div>
+              <div class="payment-price">Varies <span>per event</span></div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.15rem;">Members get priority access</div>
+            </div>
+            <button class="payment-btn" style="background:linear-gradient(135deg,#2563EB,#1D4ED8);">View Events →</button>
+          </div>
+        </div>
+
+        <div class="payment-card">
+          <div class="payment-card-header">
+            <div class="payment-icon store">🛍️</div>
+            <div>
+              <div class="payment-title">SCNC Store</div>
+              <div class="payment-desc">Purchase SCNC merchandise, cultural items, and community merchandise.</div>
+            </div>
+          </div>
+          <div class="payment-card-footer">
+            <div>
+              <div class="payment-price">Shop <span>online</span></div>
+              <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.15rem;">Merch & cultural items</div>
+            </div>
+            <button class="payment-btn" style="background:linear-gradient(135deg,#16A34A,#15803D);">Browse Store →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust bar -->
+      <div style="margin-top:3rem; background:white; border-radius:16px; padding:2rem; border:1px solid var(--border); display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; text-align:center;">
+        <div>
+          <div style="font-size:1.5rem; margin-bottom:0.4rem;">🔒</div>
+          <div style="font-weight:600; font-size:0.88rem; color:var(--dark); margin-bottom:0.2rem;">Secure Payments</div>
+          <div style="font-size:0.75rem; color:var(--text-muted);">All transactions processed securely via Zeffy & Stripe</div>
+        </div>
+        <div>
+          <div style="font-size:1.5rem; margin-bottom:0.4rem;">💯</div>
+          <div style="font-weight:600; font-size:0.88rem; color:var(--dark); margin-bottom:0.2rem;">0% Platform Fees</div>
+          <div style="font-size:0.75rem; color:var(--text-muted);">Zeffy charges nonprofits zero fees — 100% reaches SCNC</div>
+        </div>
+        <div>
+          <div style="font-size:1.5rem; margin-bottom:0.4rem;">🏛️</div>
+          <div style="font-weight:600; font-size:0.88rem; color:var(--dark); margin-bottom:0.2rem;">Tax-Deductible</div>
+          <div style="font-size:0.75rem; color:var(--text-muted);">SCNC is a 501(c)(3) nonprofit — donations are tax-deductible</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-bottom" style="border-top:none; padding-top:0;">
+        <p>© 2025 Sindhi Community of Northern California · 501(c)(3) Nonprofit</p>
+        <div class="nonprofit-badge">🏛️ info@sindhicommunity.org</div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function showPage(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.page-tabs button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function switchTab(tab) {
+    document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+    document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+    document.getElementById('form-login').style.display = tab === 'login' ? 'block' : 'none';
+    document.getElementById('form-signup').style.display = tab === 'signup' ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>

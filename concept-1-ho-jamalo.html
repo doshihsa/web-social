@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCNC — Concept 1 · Ho Jamalo · You Belong Here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════
+   SCNC — CONCEPT 1 · "HO JAMALO — YOU BELONG HERE"
+   Warm · Human · Belonging-first
+   Palette: Paper · Sand · Marigold · Terracotta · Indigo
+   ════════════════════════════════════════════════════ */
+:root{
+  --paper:#FFFCF7;
+  --paper-2:#FBF3E6;
+  --sand:#F6E8CF;
+  --sand-deep:#EFD9B4;
+  --marigold:#E8A33D;
+  --marigold-soft:#F8E3BD;
+  --terra:#C2410C;
+  --terra-deep:#9A3412;
+  --rose:#A82D49;
+  --rose-deep:#7E1D38;
+  --indigo:#284B9B;
+  --indigo-soft:#E8EDF8;
+  --ink:#2A2018;
+  --text:#5C5147;
+  --muted:#8E8174;
+  --line:rgba(150,110,70,0.16);
+  --line-soft:rgba(150,110,70,0.09);
+  --white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+/* ── Ajrak hairline ── */
+.ajrak-line{height:8px;background:repeating-linear-gradient(90deg,
+  var(--indigo) 0 7px,#F3EAD6 7px 9px,var(--rose) 9px 16px,#F3EAD6 16px 18px,
+  var(--marigold) 18px 25px,#F3EAD6 25px 27px,var(--indigo) 27px 34px,#F3EAD6 34px 36px)}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:200;background:rgba(255,252,247,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);padding:0 clamp(1.1rem,4vw,2.6rem);height:72px;
+  display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+.seal{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--marigold),var(--terra));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fraunces',serif;font-weight:700;
+  font-size:1.35rem;box-shadow:0 4px 14px rgba(194,65,12,.28);flex-shrink:0}
+.brand-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.18rem;letter-spacing:.01em;line-height:1}
+.brand-sub{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.nav-links{list-style:none;display:flex;align-items:center;gap:.15rem}
+.nav-links a{font-size:.86rem;font-weight:500;color:var(--text);text-decoration:none;padding:.45rem .85rem;border-radius:8px;transition:.15s}
+.nav-links a:hover{background:var(--paper-2);color:var(--ink)}
+.nav-cta{background:var(--terra)!important;color:#fff!important;font-weight:600!important;padding:.5rem 1.2rem!important;
+  box-shadow:0 4px 14px rgba(194,65,12,.25)}
+.nav-cta:hover{background:var(--terra-deep)!important}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--ink);border-radius:2px}
+
+/* ── HERO ── */
+.hero{max-width:1220px;margin:0 auto;padding:clamp(2.5rem,6vw,4.5rem) clamp(1.1rem,4vw,2.6rem) clamp(2rem,5vw,3.5rem);
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:.6rem;background:var(--marigold-soft);
+  border:1px solid rgba(232,163,61,.4);border-radius:99px;padding:.35rem .95rem;margin-bottom:1.6rem}
+.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--terra)}
+.eyebrow span{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-deep)}
+.hero h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.8rem,6vw,4.7rem);line-height:1.02;
+  letter-spacing:-.02em;color:var(--ink);margin-bottom:.4rem}
+.hero h1 em{font-style:italic;color:var(--terra)}
+.hero .jamalo{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(1.1rem,2.2vw,1.5rem);
+  color:var(--rose);margin-bottom:1.4rem;display:block}
+.hero .jamalo b{font-style:normal;font-weight:600}
+.hero-desc{color:var(--text);font-size:1.02rem;line-height:1.8;max-width:480px;margin-bottom:2rem}
+.actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.7rem;border-radius:99px;font-weight:600;
+  font-size:.94rem;text-decoration:none;border:0;cursor:pointer;transition:.2s}
+.btn-fill{background:var(--terra);color:#fff;box-shadow:0 6px 20px rgba(194,65,12,.28)}
+.btn-fill:hover{background:var(--terra-deep);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.6px solid var(--line)}
+.btn-ghost:hover{border-color:var(--terra);color:var(--terra)}
+
+/* hero collage */
+.collage{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1rem}
+.frame{border-radius:20px;overflow:hidden;position:relative;background:var(--sand);
+  border:1px solid var(--line);box-shadow:0 14px 40px rgba(120,80,40,.13)}
+.frame::after{content:attr(data-cap);position:absolute;left:12px;bottom:10px;font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(42,32,24,.55);background:rgba(255,252,247,.78);padding:.18rem .5rem;border-radius:6px}
+.frame.tall{grid-row:span 2;min-height:340px;background:linear-gradient(150deg,#F3D8AE,#E8A33D 60%,#C2410C)}
+.frame.f2{min-height:158px;background:linear-gradient(150deg,#E8EDF8,#9FB4E0 90%,#284B9B)}
+.frame.f3{min-height:166px;background:linear-gradient(150deg,#F7DCE0,#C98497 80%,#A82D49)}
+.frame svg{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.jamalo-badge{position:absolute;right:-14px;bottom:-14px;width:96px;height:96px;border-radius:50%;
+  background:var(--paper);border:2px dashed var(--marigold);display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;box-shadow:0 10px 26px rgba(120,80,40,.18);z-index:3;transform:rotate(-8deg)}
+.jamalo-badge b{font-family:'Fraunces',serif;font-size:.95rem;color:var(--terra);line-height:1}
+.jamalo-badge small{font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+
+/* next-event chip */
+.next-chip{margin-top:1.4rem;display:inline-flex;align-items:center;gap:.9rem;background:var(--white);
+  border:1px solid var(--line);border-radius:16px;padding:.75rem 1.1rem;box-shadow:0 8px 26px rgba(120,80,40,.1)}
+.next-chip .ne-ic{width:42px;height:42px;border-radius:12px;background:var(--rose);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.next-chip .ne-l{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.next-chip .ne-n{font-family:'Fraunces',serif;font-weight:600;font-size:.98rem;color:var(--ink)}
+.next-chip .ne-d{font-size:.76rem;color:var(--muted)}
+
+/* ── WELCOME BAND ── */
+.welcome{background:var(--paper-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.welcome-in{max-width:1000px;margin:0 auto;padding:clamp(3rem,6vw,4.5rem) clamp(1.1rem,4vw,2.6rem);text-align:center}
+.welcome p{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:clamp(1.4rem,3vw,2.2rem);
+  line-height:1.45;color:var(--ink)}
+.welcome p b{font-style:normal;font-weight:600;color:var(--terra)}
+.welcome .sig{margin-top:1.4rem;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+/* ── SECTION shell ── */
+.section{max-width:1180px;margin:0 auto;padding:clamp(3.5rem,7vw,6rem) clamp(1.1rem,4vw,2.6rem)}
+.kicker{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--terra);background:var(--marigold-soft);padding:.3rem .8rem;border-radius:99px;margin-bottom:1rem}
+.h2{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(1.9rem,4vw,3rem);line-height:1.12;
+  letter-spacing:-.01em;color:var(--ink);margin-bottom:.8rem}
+.h2 em{font-style:italic;color:var(--terra)}
+.lead{color:var(--text);font-size:1.02rem;line-height:1.8;max-width:580px}
+
+/* values */
+.values{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:2.8rem}
+.value{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:1.8rem 1.4rem;transition:.22s}
+.value:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(120,80,40,.12);border-color:rgba(194,65,12,.25)}
+.value .vic{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.1rem}
+.v1 .vic{background:var(--marigold-soft)}.v2 .vic{background:var(--indigo-soft)}
+.v3 .vic{background:#FCE7DE}.v4 .vic{background:#F4E7CE}
+.value h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;color:var(--ink);margin-bottom:.15rem}
+.value .vsub{font-size:.72rem;letter-spacing:.06em;color:var(--terra);font-weight:600;margin-bottom:.6rem}
+.value p{font-size:.85rem;color:var(--text);line-height:1.65}
+
+/* ── EVENTS ── */
+.events{background:var(--paper-2);border-top:1px solid var(--line-soft)}
+.events-in{max-width:1180px;margin:0 auto;padding:clamp(3.5rem,7vw,6rem) clamp(1.1rem,4vw,2.6rem)}
+.events-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;margin-bottom:2.6rem}
+.see-all{color:var(--terra);font-weight:600;font-size:.9rem;text-decoration:none;white-space:nowrap}
+.see-all:hover{text-decoration:underline}
+.ev-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:1.1rem}
+.ev{border-radius:20px;overflow:hidden;background:var(--white);border:1px solid var(--line);transition:.22s;
+  display:flex;flex-direction:column;cursor:pointer}
+.ev:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(120,80,40,.13)}
+.ev-top{height:128px;position:relative;display:flex;align-items:flex-end;padding:1rem}
+.ev-feat .ev-top{height:172px}
+.ev-top.t1{background:linear-gradient(140deg,#E8A33D,#C2410C)}
+.ev-top.t2{background:linear-gradient(140deg,#7FA0DA,#284B9B)}
+.ev-top.t3{background:linear-gradient(140deg,#C98497,#A82D49)}
+.ev-top.t4{background:linear-gradient(140deg,#A7C4A0,#3C7A4E)}
+.ev-top.t5{background:linear-gradient(140deg,#D9B98C,#9A3412)}
+.ev-date{background:rgba(255,252,247,.92);border-radius:11px;padding:.35rem .7rem;text-align:center;z-index:2}
+.ev-date .m{font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra)}
+.ev-date .d{font-family:'Fraunces',serif;font-weight:800;font-size:1.35rem;color:var(--ink);line-height:1}
+.ev-pat{position:absolute;inset:0;opacity:.22;background-image:
+  repeating-linear-gradient(45deg,rgba(255,255,255,.5) 0 2px,transparent 2px 13px),
+  repeating-linear-gradient(-45deg,rgba(255,255,255,.5) 0 2px,transparent 2px 13px)}
+.ev-body{padding:1.1rem 1.2rem 1.3rem}
+.ev-tag{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:99px;background:var(--marigold-soft);color:var(--terra-deep);margin-bottom:.55rem}
+.ev-feat .ev-tag{background:var(--rose);color:#fff}
+.ev h4{font-family:'Fraunces',serif;font-weight:600;font-size:1.08rem;color:var(--ink);margin-bottom:.3rem;line-height:1.25}
+.ev .loc{font-size:.78rem;color:var(--muted)}
+.recurring{margin-top:1.5rem;background:var(--indigo-soft);border:1px solid rgba(40,75,155,.14);border-radius:16px;
+  padding:1.1rem 1.5rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.recurring .rl{font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo)}
+.recurring .ri{display:flex;gap:1.4rem;flex-wrap:wrap}
+.recurring .ri span{font-size:.8rem;color:var(--indigo);display:flex;align-items:center;gap:.5rem}
+.recurring .ri span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--indigo)}
+
+/* ── STAND FOR EACH OTHER ── */
+.stand-in{max-width:1180px;margin:0 auto;padding:clamp(3.5rem,7vw,6rem) clamp(1.1rem,4vw,2.6rem)}
+.stand-card{background:linear-gradient(135deg,var(--rose-deep),var(--rose) 55%,var(--terra));border-radius:28px;
+  padding:clamp(2.2rem,5vw,3.6rem);color:#fff;position:relative;overflow:hidden}
+.stand-card::before{content:"";position:absolute;inset:0;opacity:.16;background-image:
+  repeating-linear-gradient(45deg,rgba(255,255,255,.6) 0 2px,transparent 2px 17px),
+  repeating-linear-gradient(-45deg,rgba(255,255,255,.6) 0 2px,transparent 2px 17px)}
+.stand-grid{position:relative;display:grid;grid-template-columns:1.4fr 1fr;gap:2.5rem;align-items:center}
+.stand-grid h2{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.12;margin-bottom:1rem}
+.stand-grid h2 em{font-style:italic;color:var(--marigold-soft)}
+.stand-grid p{color:rgba(255,255,255,.86);font-size:1rem;line-height:1.75;max-width:480px}
+.stand-actions{display:flex;flex-direction:column;gap:.8rem}
+.btn-cream{background:var(--paper);color:var(--rose-deep)}
+.btn-cream:hover{background:#fff;transform:translateY(-2px)}
+.btn-line{background:transparent;color:#fff;border:1.6px solid rgba(255,255,255,.55)}
+.btn-line:hover{background:rgba(255,255,255,.12)}
+.stand-note{font-size:.74rem;color:rgba(255,255,255,.7);text-align:center}
+
+/* ── VOICES ── */
+.voices{background:var(--paper-2);border-top:1px solid var(--line-soft)}
+.voices-in{max-width:1180px;margin:0 auto;padding:clamp(3.5rem,7vw,6rem) clamp(1.1rem,4vw,2.6rem)}
+.verse{max-width:760px;margin:0 auto 3rem;text-align:center}
+.verse p{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:clamp(1.3rem,2.8vw,1.9rem);
+  line-height:1.5;color:var(--ink)}
+.verse cite{display:block;margin-top:1rem;font-style:normal;font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.quote{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.6rem}
+.quote p{font-size:.92rem;color:var(--text);line-height:1.7;margin-bottom:1.1rem}
+.quote .who{display:flex;align-items:center;gap:.7rem}
+.quote .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--marigold),var(--terra));
+  color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:.85rem}
+.quote .nm{font-weight:600;font-size:.85rem;color:var(--ink)}
+.quote .rl{font-size:.72rem;color:var(--muted)}
+
+/* ── JOIN STRIP ── */
+.join-in{max-width:1180px;margin:0 auto;padding:clamp(3rem,6vw,5rem) clamp(1.1rem,4vw,2.6rem)}
+.join-card{display:grid;grid-template-columns:1fr auto;gap:2.5rem;align-items:center;background:var(--white);
+  border:1px solid var(--line);border-radius:24px;padding:clamp(1.8rem,4vw,3rem);box-shadow:0 10px 36px rgba(120,80,40,.08)}
+.join-card h2{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.15;margin-bottom:.6rem}
+.join-card p{color:var(--text);font-size:.96rem;line-height:1.7;max-width:520px}
+.join-r{text-align:right;display:flex;flex-direction:column;gap:.7rem;align-items:flex-end}
+.price{font-family:'Fraunces',serif;font-weight:800;font-size:2rem;color:var(--terra);line-height:1}
+.price span{font-size:.9rem;font-weight:500;color:var(--muted)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:#fff}
+.foot-top{max-width:1180px;margin:0 auto;padding:clamp(2.8rem,6vw,4rem) clamp(1.1rem,4vw,2.6rem) 2.2rem;
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:2.5rem}
+.foot-brand .fb-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem;color:var(--marigold-soft);margin-bottom:.6rem}
+.foot-brand p{font-size:.84rem;color:rgba(255,255,255,.5);line-height:1.7;max-width:250px;margin-bottom:1.1rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:9px;border:1px solid rgba(255,255,255,.16);display:flex;
+  align-items:center;justify-content:center;font-size:.75rem;color:rgba(255,255,255,.55);text-decoration:none;transition:.2s}
+.socials a:hover{background:var(--terra);border-color:var(--terra);color:#fff}
+.foot-col h4{font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1rem}
+.foot-col ul{list-style:none}
+.foot-col li{margin-bottom:.55rem}
+.foot-col a{font-size:.85rem;color:rgba(255,255,255,.6);text-decoration:none}
+.foot-col a:hover{color:#fff}
+.foot-contact p{font-size:.83rem;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:.4rem}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.08)}
+.foot-bottom .fb-in{max-width:1180px;margin:0 auto;padding:1.2rem clamp(1.1rem,4vw,2.6rem);display:flex;
+  justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.foot-bottom p{font-size:.74rem;color:rgba(255,255,255,.35)}
+.badge501{display:inline-flex;align-items:center;gap:.4rem;border:1px solid rgba(232,163,61,.4);
+  color:rgba(255,255,255,.55);padding:.3rem .8rem;border-radius:99px;font-size:.66rem;font-weight:600;letter-spacing:.06em}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:920px){
+  .hero{grid-template-columns:1fr;gap:2.5rem}
+  .values{grid-template-columns:repeat(2,1fr)}
+  .ev-grid{grid-template-columns:1fr 1fr}
+  .quotes{grid-template-columns:1fr}
+  .stand-grid{grid-template-columns:1fr;gap:1.6rem}
+  .join-card{grid-template-columns:1fr}
+  .join-r{text-align:left;align-items:flex-start}
+  .foot-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  .nav-links{position:fixed;top:80px;right:14px;left:14px;flex-direction:column;align-items:stretch;gap:.3rem;
+    background:var(--white);border:1px solid var(--line);border-radius:16px;padding:.8rem;box-shadow:0 20px 50px rgba(0,0,0,.14);
+    display:none}
+  .nav-links.open{display:flex}
+  .burger{display:flex}
+  .values{grid-template-columns:1fr}
+  .ev-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr}
+  .quotes{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="ajrak-line"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="brand" href="#">
+    <div class="seal">स</div>
+    <div>
+      <div class="brand-name">SCNC</div>
+      <div class="brand-sub">Sindhi Community · Bay Area</div>
+    </div>
+  </a>
+  <button class="burger" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav">
+    <li><a href="#">Home</a></li>
+    <li><a href="#welcome">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#stand">Give</a></li>
+    <li><a href="#join">Join</a></li>
+    <li><a href="#" class="nav-cta">Member Login</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-left">
+    <div class="eyebrow"><span class="dot"></span><span>Bay Area · A family since 2002</span></div>
+    <h1>You <em>belong</em> here.</h1>
+    <span class="jamalo"><b>Ho Jamalo</b> — come, let's celebrate together.</span>
+    <p class="hero-desc">We are the Sindhi Community of Northern California — a home in the Bay Area where our music, food, festivals, and faith bring us together. Whoever you are, however you found us: there's a seat for you at our table.</p>
+    <div class="actions">
+      <a href="#join" class="btn btn-fill">Become part of the family</a>
+      <a href="#events" class="btn btn-ghost">See what's on →</a>
+    </div>
+    <div class="next-chip">
+      <div class="ne-ic">🪔</div>
+      <div>
+        <div class="ne-l">Next celebration</div>
+        <div class="ne-n">Annual Diwali Gala 2025</div>
+        <div class="ne-d">October · Bay Area</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collage">
+    <div class="frame tall" data-cap="Diwali Gala">
+      <svg viewBox="0 0 200 340" preserveAspectRatio="none"><g stroke="rgba(255,255,255,.55)" stroke-width="1.2" fill="none">
+        <circle cx="100" cy="120" r="60"/><circle cx="100" cy="120" r="42"/><circle cx="100" cy="120" r="24"/>
+        <path d="M100 60 L100 180 M40 120 L160 120 M58 78 L142 162 M142 78 L58 162"/>
+        <path d="M40 250 Q70 230 100 250 T160 250" stroke-width="1.5"/>
+        <path d="M40 275 Q70 255 100 275 T160 275"/></g></svg>
+    </div>
+    <div class="frame f2" data-cap="Cheti Chand">
+      <svg viewBox="0 0 200 158" preserveAspectRatio="none"><g stroke="rgba(255,255,255,.6)" stroke-width="1.3" fill="none">
+        <path d="M10 110 Q50 88 100 110 T190 110"/><path d="M10 128 Q50 106 100 128 T190 128"/>
+        <ellipse cx="100" cy="55" rx="26" ry="14"/><circle cx="100" cy="55" r="8"/></g></svg>
+    </div>
+    <div class="frame f3" data-cap="Picnic in the Park">
+      <svg viewBox="0 0 200 166" preserveAspectRatio="none"><g stroke="rgba(255,255,255,.6)" stroke-width="1.3" fill="none">
+        <circle cx="70" cy="80" r="22"/><circle cx="120" cy="95" r="16"/><circle cx="140" cy="60" r="12"/>
+        <path d="M20 140 H180"/></g></svg>
+    </div>
+    <div class="jamalo-badge"><b>Ho<br>Jamalo</b><small>Together</small></div>
+  </div>
+</header>
+
+<!-- WELCOME BAND -->
+<section class="welcome" id="welcome">
+  <div class="welcome-in">
+    <p>From the banks of the <b>Indus</b> to the heart of the Bay Area, Sindhis have always carried home with us — not in a place, but in <b>each other</b>.</p>
+    <div class="sig">Sindhi Community of Northern California · Fremont</div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section reveal">
+  <span class="kicker">What brings us together</span>
+  <h2 class="h2">Old values, <em>living</em> here today</h2>
+  <p class="lead">For thousands of years, Sindhi life has rested on a few simple things. They are why we gather, and why everyone is welcome the moment they walk in.</p>
+  <div class="values">
+    <div class="value v1">
+      <div class="vic">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C2410C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/><path d="M9 19v-5h6v5"/></svg>
+      </div>
+      <div class="vsub">Mehmān-nawāzi</div>
+      <h3>Hospitality</h3>
+      <p>Every guest is family. No one is turned away from a Sindhi home — or a Sindhi gathering.</p>
+    </div>
+    <div class="value v2">
+      <div class="vic">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#284B9B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15.5 14.2c2.6.4 4.5 2.5 4.5 5.3"/></svg>
+      </div>
+      <div class="vsub">Ho Jamalo</div>
+      <h3>Togetherness</h3>
+      <p>Joy is meant to be shared. We celebrate loudly, dance together, and lift one another up.</p>
+    </div>
+    <div class="value v3">
+      <div class="vic">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#A82D49" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.3-9.3-9C1 8.6 2.8 5 6.3 5 8.4 5 9.8 6.3 12 8.7 14.2 6.3 15.6 5 17.7 5 21.2 5 23 8.6 21.3 12 19 16.7 12 21 12 21z"/></svg>
+      </div>
+      <div class="vsub">Seva</div>
+      <h3>Service</h3>
+      <p>We stand for each other — through milestones and hardship alike. Helping is simply what we do.</p>
+    </div>
+    <div class="value v4">
+      <div class="vic">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9A3412" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><path d="M12 22c-4 0-7-3-7-7 0-3 2-5 7-7 5 2 7 4 7 7 0 4-3 7-7 7z"/></svg>
+      </div>
+      <div class="vsub">Our roots</div>
+      <h3>Heritage</h3>
+      <p>Language, faith, and craft passed hand to hand — so the next generation knows exactly who they are.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <div class="events-in reveal">
+    <div class="events-head">
+      <div>
+        <span class="kicker">Come celebrate with us</span>
+        <h2 class="h2">Gatherings through the year</h2>
+        <p class="lead">Every event is an open invitation. Bring your family, bring a friend — there's always room for more.</p>
+      </div>
+      <a href="#" class="see-all">View full calendar →</a>
+    </div>
+    <div class="ev-grid">
+      <div class="ev ev-feat">
+        <div class="ev-top t1"><div class="ev-pat"></div><div class="ev-date"><div class="m">Oct</div><div class="d">'25</div></div></div>
+        <div class="ev-body">
+          <span class="ev-tag">★ Flagship</span>
+          <h4>Annual Diwali Gala 2025</h4>
+          <div class="loc">Bay Area Venue · Dinner, performances & celebration</div>
+        </div>
+      </div>
+      <div class="ev">
+        <div class="ev-top t2"><div class="ev-pat"></div><div class="ev-date"><div class="m">Apr</div><div class="d">7</div></div></div>
+        <div class="ev-body">
+          <span class="ev-tag">Sindhi New Year</span>
+          <h4>Cheti Chand</h4>
+          <div class="loc">Bay Area Temple · Birth of Jhulelal</div>
+        </div>
+      </div>
+      <div class="ev">
+        <div class="ev-top t4"><div class="ev-pat"></div><div class="ev-date"><div class="m">Aug</div><div class="d">4</div></div></div>
+        <div class="ev-body">
+          <span class="ev-tag">Family</span>
+          <h4>Picnic in the Park</h4>
+          <div class="loc">Bay Area Park · Food, games & togetherness</div>
+        </div>
+      </div>
+      <div class="ev">
+        <div class="ev-top t3"><div class="ev-pat"></div><div class="ev-date"><div class="m">Sep</div><div class="d">14</div></div></div>
+        <div class="ev-body">
+          <span class="ev-tag">Spiritual</span>
+          <h4>Satnarayan Katha</h4>
+          <div class="loc">Fremont Temple</div>
+        </div>
+      </div>
+      <div class="ev">
+        <div class="ev-top t5"><div class="ev-pat"></div><div class="ev-date"><div class="m">Nov</div><div class="d">16</div></div></div>
+        <div class="ev-body">
+          <span class="ev-tag">Religious</span>
+          <h4>Guru Nanak Janam</h4>
+          <div class="loc">Sunnyvale Gurdwara</div>
+        </div>
+      </div>
+    </div>
+    <div class="recurring">
+      <div class="rl">Every week & month</div>
+      <div class="ri">
+        <span>Weekly Jhulelal Aarti — Fremont & Sunnyvale</span>
+        <span>Monthly Chandu Aarti & Palav</span>
+        <span>Sadhu Vaswani Satsang</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAND FOR EACH OTHER -->
+<section id="stand">
+  <div class="stand-in reveal">
+    <div class="stand-card">
+      <div class="stand-grid">
+        <div>
+          <h2>We have no borders.<br>We have <em>each other.</em></h2>
+          <p>SCNC runs on the generosity of our own. Every dollar funds the gatherings, the aartis, and the quiet help we give families when they need it most. As a 501(c)(3), your gift is tax-deductible — and through Zeffy, 100% reaches the community.</p>
+        </div>
+        <div class="stand-actions">
+          <a href="#" class="btn btn-cream">Make a donation</a>
+          <a href="#" class="btn btn-line">Volunteer with us</a>
+          <div class="stand-note">0% platform fees · Tax-deductible</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="voices">
+  <div class="voices-in reveal">
+    <div class="verse">
+      <p>"The whole world is one — there are no strangers here. Look with the eyes of love, and every face is your own."</p>
+      <cite>— in the spirit of Shah Abdul Latif Bhittai · Shah Jo Risalo</cite>
+    </div>
+    <div class="quotes">
+      <div class="quote">
+        <p>"My kids were born here, but at SCNC they learn the songs my mother sang in Sindh. That's everything to me."</p>
+        <div class="who"><div class="av">RA</div><div><div class="nm">A Bay Area parent</div><div class="rl">Member since 2019</div></div></div>
+      </div>
+      <div class="quote">
+        <p>"I walked into Cheti Chand not knowing a soul. By the end of the night I had twenty new aunties and a plate of daal pakwan."</p>
+        <div class="who"><div class="av">JM</div><div><div class="nm">A new arrival</div><div class="rl">Joined 2024</div></div></div>
+      </div>
+      <div class="quote">
+        <p>"When my father passed, the community showed up before I even asked. That is what Sindhi means to me."</p>
+        <div class="who"><div class="av">SL</div><div><div class="nm">A longtime volunteer</div><div class="rl">Fremont</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join">
+  <div class="join-in reveal">
+    <div class="join-card">
+      <div>
+        <span class="kicker">Become a member</span>
+        <h2>Join a family of 500+</h2>
+        <p>Membership keeps our culture alive and gives you priority access to every event, the member newsletter, and a say in where we go next. It's the simplest way to say: I'm part of this.</p>
+      </div>
+      <div class="join-r">
+        <div class="price">$25 <span>/ year</span></div>
+        <a href="#" class="btn btn-fill">Become a member</a>
+        <div class="stand-note" style="color:var(--muted)">Family rates available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="ajrak-line"></div>
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <div class="fb-name">SCNC</div>
+      <p>Sindhi Community of Northern California — keeping the Sindhi spirit alive in the Bay Area since 2002.</p>
+      <div class="socials"><a href="#">f</a><a href="#">in</a><a href="#">▶</a><a href="#">◎</a></div>
+    </div>
+    <div class="foot-col">
+      <h4>Community</h4>
+      <ul><li><a href="#welcome">About Us</a></li><li><a href="#">Board Members</a></li><li><a href="#">Volunteers</a></li><li><a href="#">Store</a></li></ul>
+    </div>
+    <div class="foot-col">
+      <h4>Programs</h4>
+      <ul><li><a href="#events">2025 Events</a></li><li><a href="#">Diwali Gala</a></li><li><a href="#">Cheti Chand</a></li><li><a href="#">Sindhi Tipno</a></li></ul>
+    </div>
+    <div class="foot-col foot-contact">
+      <h4>Visit / Contact</h4>
+      <p>39270 Paseo Padre Pkwy, Suite&nbsp;#321<br>Fremont, CA 94538</p>
+      <p>(510) 972-4660</p>
+      <p>info@sindhicommunity.org</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="fb-in">
+      <p>© 2025 Sindhi Community of Northern California. All rights reserved.</p>
+      <span class="badge501">★ 501(c)(3) Nonprofit</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('#nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open')));
+</script>
+</body>
+</html>
